@@ -200,7 +200,7 @@
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--cmp-gold);
+            background: #00E676;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -230,7 +230,11 @@
 
         .cmp-hero-left h1 em {
             font-style: normal;
-            color: var(--cmp-gold);
+            color: white;
+            text-decoration: underline;
+            text-decoration-thickness: 4px;
+            text-decoration-color: #0088FF;
+            text-underline-offset: 4px;
         }
 
         .cmp-hero-left p {
@@ -438,18 +442,19 @@
             min-width: 100px;
         }
 
-        .cmp-mineral-sub {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.85);
+        .cmp-mineral-card p.cmp-mineral-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.95);
             margin: 0;
         }
 
         .cmp-what-imgbox {
-            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
             border-radius: 20px;
             overflow: hidden;
             min-height: 420px;
-            background: linear-gradient(135deg, var(--cmp-darker), var(--cmp-blue));
             box-shadow: 0 20px 60px rgba(0, 47, 108, 0.2);
         }
 
@@ -983,8 +988,8 @@
             </div>
         </div>
         <div class="cmp-hero-right">
-            <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3ad024?q=80&w=1200&auto=format&fit=crop"
-                alt="Operaciones CMP"
+            <img src="./Acopio%20de%20hierro.png"
+                alt="Acopio de hierro"
                 style="width:100%; height:100%; object-fit:cover; min-height:400px; display:block;">
         </div>
     </div>
@@ -1043,18 +1048,15 @@
                         </div>
                         <div class="cmp-mineral-badge">FeMag ≥ 43%</div>
                     </div>
-                    <div class="cmp-mineral-card">
-                        <div class="cmp-mineral-info">
-                            <h4>Zonas de interés</h4>
-                            <p class="cmp-mineral-sub">Procedencia del mineral</p>
-                        </div>
-                        <div class="cmp-mineral-badge">Coquimbo y Atacama</div>
-                    </div>
+
                 </div>
             </div>
             <div class="cmp-what-imgbox">
-                <img src="https://images.unsplash.com/photo-1610480399728-ceeeacc637c3?q=80&w=800&auto=format&fit=crop"
-                    alt="Mineral de hierro"
+                <img src="./Productos%20de%20interes.png"
+                    alt="Productos de interes"
+                    style="width:100%; height:100%; min-height:420px; object-fit:cover; display:block;">
+                <img src="./mercado%20de%20hierro.png"
+                    alt="Mercado de hierro"
                     style="width:100%; height:100%; min-height:420px; object-fit:cover; display:block;">
             </div>
         </div>
