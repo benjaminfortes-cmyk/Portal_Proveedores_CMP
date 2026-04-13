@@ -449,12 +449,11 @@
         }
 
         .cmp-what-imgbox {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px;
+            position: relative;
             border-radius: 20px;
             overflow: hidden;
             min-height: 420px;
+            background: linear-gradient(135deg, var(--cmp-darker), var(--cmp-blue));
             box-shadow: 0 20px 60px rgba(0, 47, 108, 0.2);
         }
 
@@ -630,11 +629,16 @@
         }
 
         .cmp-payment-imgbox {
-            border-radius: 20px;
-            overflow: hidden;
+            border-radius: 24px;
             min-height: 380px;
-            background: linear-gradient(135deg, var(--cmp-darker), var(--cmp-blue));
-            box-shadow: 0 20px 60px rgba(0, 47, 108, 0.15);
+            background: white;
+            border: 6px solid var(--cmp-blue);
+            padding: 6px;
+            box-shadow: 0 20px 60px rgba(0, 47, 108, 0.2);
+        }
+
+        .cmp-payment-imgbox img {
+            border-radius: 16px;
         }
 
         .cmp-payment-img-placeholder {
@@ -978,8 +982,9 @@
         <div class="cmp-hero-left">
             <div class="cmp-hero-tag">Compra de Mineral Externo · Activo</div>
             <h1>¿Produces mineral de <em>hierro</em>?<br>CMP lo compra.</h1>
-            <p>Somos la principal empresa minera de hierro de Chile. Si operas en las regiones de Coquimbo o Atacama y
-                produces Sínter o Preconcentrado, queremos conocerte.</p>
+            <p>Somos la principal empresa minera de hierro de Chile y estamos ampliando nuestra red de proveedores
+                externos. Si produces mineral de hierro en cualquiera de sus granulometrías, ya sea preconcentrado o
+                sínter, queremos conocerte.</p>
             <div class="cmp-hero-btns">
                 <a href="https://forms.office.com/r/9bLW6gLpM1" class="cmp-btn-gold"><i class="ph ph-clipboard-text"
                         style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 4px;"></i> Postular como
@@ -988,8 +993,7 @@
             </div>
         </div>
         <div class="cmp-hero-right">
-            <img src="./Acopio%20de%20hierro.png"
-                alt="Acopio de hierro"
+            <img src="./Imagen3.jpg" alt="Acopio de hierro"
                 style="width:100%; height:100%; object-fit:cover; min-height:400px; display:block;">
         </div>
     </div>
@@ -1052,11 +1056,7 @@
                 </div>
             </div>
             <div class="cmp-what-imgbox">
-                <img src="./Productos%20de%20interes.png"
-                    alt="Productos de interes"
-                    style="width:100%; height:100%; min-height:420px; object-fit:cover; display:block;">
-                <img src="./mercado%20de%20hierro.png"
-                    alt="Mercado de hierro"
+                <img src="./chile.png" alt="Chile"
                     style="width:100%; height:100%; min-height:420px; object-fit:cover; display:block;">
             </div>
         </div>
@@ -1114,8 +1114,7 @@
     <div class="cmp-payment">
         <div class="cmp-payment-inner">
             <div class="cmp-payment-imgbox">
-                <img src="https://images.unsplash.com/photo-1588613256801-6c23ce007edc?q=80&w=1000&auto=format&fit=crop"
-                    alt="Puerto Guayacán"
+                <img src="./Imagen1.jpg" alt="Condiciones Comerciales"
                     style="width:100%; height:100%; min-height:380px; object-fit:cover; display:block;">
             </div>
             <div>
