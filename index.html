@@ -491,6 +491,35 @@
             }
         }
 
+        /* Subtítulo hero resplandeciente: shimmer dorado + glow pulse */
+        .cmp-hero-shimmer {
+            background: linear-gradient(120deg, #C8821A 0%, #F5A623 30%, #FFE7A8 50%, #F5A623 70%, #C8821A 100%);
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: cmp-gold-rotate 5s linear infinite,
+                cmp-hero-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes cmp-hero-glow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.25));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 18px rgba(245, 166, 35, 0.55));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cmp-hero-shimmer {
+                animation: none;
+            }
+        }
+
         .cmp-stat-lbl {
             font-size: 11px;
             color: rgba(255, 255, 255, 0.6);
@@ -682,6 +711,21 @@
             border-radius: 10px;
             box-shadow: 0 6px 18px rgba(0, 47, 108, 0.35);
             letter-spacing: 0.5px;
+        }
+
+        .cmp-mineral-product-specs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .cmp-mineral-product-spec-sm {
+            font-size: 16px;
+            padding: 7px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 47, 108, 0.28);
         }
 
         .cmp-mineral-product-card:hover {
@@ -1339,7 +1383,7 @@
         <div class="cmp-hero-left">
             <div class="cmp-hero-tag">Compra de Mineral Externo · Activo</div>
             <h1>¿Produces mineral de <em>hierro</em>?<br>CMP lo compra.</h1>
-            <h2
+            <h2 class="cmp-hero-shimmer"
                 style="font-family: 'Barlow Condensed', sans-serif; font-size: 24px; color: var(--cmp-gold); margin-bottom: 20px; font-weight: 600;">
                 ¿BUSCAS OPORTUNIDAD DE NEGOCIO seguro? CMP lo ofrece</h2>
             <p>Somos la principal empresa minera de hierro de Chile y estamos ampliando nuestra red de proveedores
@@ -1451,7 +1495,11 @@
                     <div class="cmp-mineral-product-inner">
                         <div class="cmp-mineral-product-icon"><i class="ph ph-mountains"></i></div>
                         <div class="cmp-mineral-product-name">Preconcentrado</div>
-                        <div class="cmp-mineral-product-spec">Mín. 40%</div>
+                        <div class="cmp-mineral-product-specs">
+                            <span class="cmp-mineral-product-spec cmp-mineral-product-spec-sm">Mín. 40%</span>
+                            <span class="cmp-mineral-product-spec cmp-mineral-product-spec-sm">Mín. 43%</span>
+                            <span class="cmp-mineral-product-spec cmp-mineral-product-spec-sm">Mín. 45%</span>
+                        </div>
                     </div>
                 </div>
 
