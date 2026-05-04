@@ -151,10 +151,28 @@
             font-weight: 600;
             text-decoration: none;
             transition: color 0.2s;
+            position: relative;
+        }
+
+        .cmp-nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 2px;
+            background: var(--cmp-blue);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.35s ease;
         }
 
         .cmp-nav-link:hover {
             color: var(--cmp-blue);
+        }
+
+        .cmp-nav-link:hover::after {
+            transform: scaleX(1);
         }
 
         .cmp-nav-cta {
@@ -291,12 +309,15 @@
             color: var(--cmp-darker);
         }
 
-        /* Botón principal destacado: pulso continuo + shine sweep */
+        /* Botón principal destacado: pulso continuo + shine sweep + gradiente animado */
         .cmp-btn-gold.cmp-btn-primary {
             position: relative;
             overflow: hidden;
             isolation: isolate;
-            animation: cmp-btn-pulse 2.8s ease-in-out infinite;
+            background: linear-gradient(110deg, #F5A623 0%, #FFC857 45%, #F5A623 55%, #E8941A 100%);
+            background-size: 220% 100%;
+            animation: cmp-btn-pulse 2.8s ease-in-out infinite,
+                cmp-btn-glow 5.5s linear infinite;
         }
 
         .cmp-btn-gold.cmp-btn-primary::before {
@@ -352,6 +373,16 @@
 
             100% {
                 left: 175%;
+            }
+        }
+
+        @keyframes cmp-btn-glow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: -220% 50%;
             }
         }
 
@@ -582,8 +613,8 @@
             left: -60%;
             background: conic-gradient(from 0deg,
                     transparent 0deg,
-                    rgba(245, 166, 35, 0.55) 55deg,
-                    rgba(245, 166, 35, 0.15) 95deg,
+                    rgba(255, 255, 255, 0.45) 55deg,
+                    rgba(255, 255, 255, 0.12) 95deg,
                     transparent 130deg,
                     transparent 360deg);
             animation: cmp-mineral-orbit 7s linear infinite;
@@ -628,8 +659,8 @@
 
         .cmp-mineral-product-card:hover .cmp-mineral-product-icon {
             transform: scale(1.1) rotate(-10deg);
-            background: rgba(245, 166, 35, 0.2);
-            border-color: rgba(245, 166, 35, 0.5);
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.45);
         }
 
         .cmp-mineral-product-name {
@@ -642,14 +673,14 @@
         }
 
         .cmp-mineral-product-spec {
-            background: var(--cmp-gold);
+            background: white;
             color: var(--cmp-darker);
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 22px;
             font-weight: 800;
             padding: 10px 28px;
             border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(245, 166, 35, 0.35);
+            box-shadow: 0 6px 18px rgba(0, 47, 108, 0.35);
             letter-spacing: 0.5px;
         }
 
@@ -1319,7 +1350,7 @@
                 <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_7PT2OLhK1sBiDmC" class="cmp-btn-gold cmp-btn-primary"><i class="ph ph-clipboard-text"
                         style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 4px;"></i> Postular como
                     proveedor</a>
-                <a href="#arriendo" class="cmp-btn-gold"><i class="ph ph-map-trifold"
+                <a href="#arriendo" class="cmp-btn-gold cmp-btn-primary"><i class="ph ph-map-trifold"
                         style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 4px;"></i> Postula para
                     arrendar concesiones mineras</a>
                 <a href="#proceso" class="cmp-btn-outline">Ver el proceso ↓</a>
