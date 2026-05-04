@@ -19,7 +19,7 @@
             --cmp-blue: #0066CC;
             --cmp-dark: #004A99;
             --cmp-darker: #002F6C;
-            --cmp-gold: #0EA5E9;
+            --cmp-gold: #F5A623;
             --cmp-light: #E8F2FF;
             --white: #FFFFFF;
             --gray-bg: #F4F7FB;
@@ -362,7 +362,7 @@
             font-size: 38px;
             font-weight: 700;
             color: var(--cmp-gold);
-            background: linear-gradient(120deg, #0369A1 0%, #0EA5E9 30%, #F0F9FF 50%, #0EA5E9 70%, #0369A1 100%);
+            background: linear-gradient(120deg, #C8821A 0%, #F5A623 30%, #FFE7A8 50%, #F5A623 70%, #C8821A 100%);
             background-size: 250% 100%;
             -webkit-background-clip: text;
             background-clip: text;
@@ -614,9 +614,40 @@
         .cmp-process-icon-wrap {
             width: 80px;
             height: 80px;
-            margin: 0 auto 24px;
+            margin: 14px auto 32px;
             position: relative;
             z-index: 1;
+        }
+
+        .cmp-process-icon-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 102, 204, 0.32);
+            animation: cmp-process-orbit 14s linear infinite;
+            pointer-events: none;
+            transition: border-color 0.35s ease;
+        }
+
+        .cmp-process-step:hover .cmp-process-icon-wrap::before {
+            border-color: rgba(0, 102, 204, 0.6);
+        }
+
+        @keyframes cmp-process-orbit {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cmp-process-icon-wrap::before {
+                animation: none;
+            }
         }
 
         .cmp-process-icon-bg {
@@ -699,40 +730,34 @@
             display: grid;
             grid-template-columns: 1fr 1.05fr;
             gap: 70px;
-            align-items: center;
+            align-items: stretch;
         }
 
         .cmp-payment-imgbox {
-            border-radius: 18px;
-            min-height: 460px;
+            border-radius: 16px;
             background: white;
-            box-shadow: 0 24px 60px rgba(0, 47, 108, 0.18),
+            border: 4px solid var(--cmp-blue);
+            padding: 4px;
+            box-shadow: 0 22px 50px rgba(0, 47, 108, 0.18),
                 0 4px 12px rgba(0, 47, 108, 0.08);
             overflow: hidden;
             position: relative;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .cmp-payment-imgbox::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 18px;
-            border: 1px solid rgba(0, 102, 204, 0.12);
-            pointer-events: none;
-        }
-
         .cmp-payment-imgbox:hover {
             transform: translateY(-4px);
-            box-shadow: 0 30px 70px rgba(0, 47, 108, 0.22),
-                0 6px 16px rgba(0, 47, 108, 0.10);
+            box-shadow: 0 28px 60px rgba(0, 47, 108, 0.22),
+                0 6px 14px rgba(0, 47, 108, 0.10);
         }
 
         .cmp-payment-imgbox img {
-            border-radius: 18px;
+            border-radius: 10px;
             display: block;
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         .cmp-payment-img-placeholder {
@@ -1338,7 +1363,7 @@
                         </div>
                     </div>
                     <div class="cmp-payment-item">
-                        <div class="cmp-payment-icon"><i class="ph ph-file-contract" style="color: white;"></i></div>
+                        <div class="cmp-payment-icon"><i class="ph ph-file-text" style="color: white;"></i></div>
                         <div class="cmp-payment-text">
                             <h4>Contratos desde 12 meses</h4>
                             <p>Ofrecemos contratos de suministro desde 12 meses, con opción de renovación y ajuste de
