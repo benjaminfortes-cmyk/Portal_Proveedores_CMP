@@ -291,6 +291,78 @@
             color: var(--cmp-darker);
         }
 
+        /* Botón principal destacado: pulso continuo + shine sweep */
+        .cmp-btn-gold.cmp-btn-primary {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            animation: cmp-btn-pulse 2.8s ease-in-out infinite;
+        }
+
+        .cmp-btn-gold.cmp-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(100deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.55) 50%,
+                    transparent 100%);
+            transform: skewX(-22deg);
+            animation: cmp-btn-shine 4.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cmp-btn-gold.cmp-btn-primary > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cmp-btn-gold.cmp-btn-primary:hover {
+            animation-play-state: paused;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 14px 36px rgba(245, 166, 35, 0.55);
+        }
+
+        @keyframes cmp-btn-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 16px rgba(245, 166, 35, 0.4),
+                    0 0 0 0 rgba(245, 166, 35, 0.45);
+            }
+
+            50% {
+                box-shadow: 0 8px 26px rgba(245, 166, 35, 0.6),
+                    0 0 0 10px rgba(245, 166, 35, 0);
+            }
+        }
+
+        @keyframes cmp-btn-shine {
+            0% {
+                left: -75%;
+            }
+
+            55% {
+                left: 175%;
+            }
+
+            100% {
+                left: 175%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .cmp-btn-gold.cmp-btn-primary,
+            .cmp-btn-gold.cmp-btn-primary::before {
+                animation: none;
+            }
+        }
+
         .cmp-btn-outline {
             background: transparent;
             color: white;
@@ -489,6 +561,114 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.95);
             margin: 0;
+        }
+
+        /* ── PRODUCT CARDS (Minerales que estamos comprando) ── */
+        .cmp-mineral-product-card {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            aspect-ratio: 1 / 1.05;
+            box-shadow: 0 14px 38px rgba(0, 47, 108, 0.18);
+        }
+
+        .cmp-mineral-product-card::before {
+            content: '';
+            position: absolute;
+            width: 220%;
+            height: 220%;
+            top: -60%;
+            left: -60%;
+            background: conic-gradient(from 0deg,
+                    transparent 0deg,
+                    rgba(245, 166, 35, 0.55) 55deg,
+                    rgba(245, 166, 35, 0.15) 95deg,
+                    transparent 130deg,
+                    transparent 360deg);
+            animation: cmp-mineral-orbit 7s linear infinite;
+            z-index: 0;
+        }
+
+        .cmp-mineral-product-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--cmp-darker) 0%, var(--cmp-dark) 55%, var(--cmp-blue) 100%);
+            z-index: 1;
+        }
+
+        .cmp-mineral-product-inner {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 36px 28px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            text-align: center;
+        }
+
+        .cmp-mineral-product-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            transition: transform 0.45s ease, background 0.45s ease, border-color 0.45s ease;
+        }
+
+        .cmp-mineral-product-card:hover .cmp-mineral-product-icon {
+            transform: scale(1.1) rotate(-10deg);
+            background: rgba(245, 166, 35, 0.2);
+            border-color: rgba(245, 166, 35, 0.5);
+        }
+
+        .cmp-mineral-product-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .cmp-mineral-product-spec {
+            background: var(--cmp-gold);
+            color: var(--cmp-darker);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            padding: 10px 28px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(245, 166, 35, 0.35);
+            letter-spacing: 0.5px;
+        }
+
+        .cmp-mineral-product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 50px rgba(0, 47, 108, 0.28);
+        }
+
+        @keyframes cmp-mineral-orbit {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .cmp-mineral-product-card::before {
+                animation: none;
+            }
         }
 
         .cmp-what-imgbox {
@@ -1136,7 +1316,7 @@
                 sínter, queremos conocerte. Además, <strong>se arriendan concesiones mineras</strong> para que puedas
                 operarlas con demanda garantizada.</p>
             <div class="cmp-hero-btns">
-                <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_7PT2OLhK1sBiDmC" class="cmp-btn-gold"><i class="ph ph-clipboard-text"
+                <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_7PT2OLhK1sBiDmC" class="cmp-btn-gold cmp-btn-primary"><i class="ph ph-clipboard-text"
                         style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 4px;"></i> Postular como
                     proveedor</a>
                 <a href="#arriendo" class="cmp-btn-gold"><i class="ph ph-map-trifold"
@@ -1227,23 +1407,29 @@
                 style="font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; color: var(--text-dark); margin-bottom: 40px;">
                 Minerales que estamos comprando</h2>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                <div class="cmp-mineral-card"
-                    style="padding: 40px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transition: all 0.3s; transform-origin: center;">
-                    <div style="font-size: 26px; font-weight: 800; color: white;">Sínter Feed</div>
-                    <div class="cmp-mineral-badge" style="font-size: 22px; padding: 12px 30px;">Fe Mín. 63%</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px;">
+                <div class="cmp-mineral-product-card">
+                    <div class="cmp-mineral-product-inner">
+                        <div class="cmp-mineral-product-icon"><i class="ph ph-cube"></i></div>
+                        <div class="cmp-mineral-product-name">Sínter Feed</div>
+                        <div class="cmp-mineral-product-spec">Fe Mín. 63%</div>
+                    </div>
                 </div>
 
-                <div class="cmp-mineral-card"
-                    style="padding: 40px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transition: all 0.3s; transform-origin: center;">
-                    <div style="font-size: 26px; font-weight: 800; color: white;">Preconcentrado</div>
-                    <div class="cmp-mineral-badge" style="font-size: 22px; padding: 12px 30px;">Mín. 40%</div>
+                <div class="cmp-mineral-product-card">
+                    <div class="cmp-mineral-product-inner">
+                        <div class="cmp-mineral-product-icon"><i class="ph ph-mountains"></i></div>
+                        <div class="cmp-mineral-product-name">Preconcentrado</div>
+                        <div class="cmp-mineral-product-spec">Mín. 40%</div>
+                    </div>
                 </div>
 
-                <div class="cmp-mineral-card"
-                    style="padding: 40px 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transition: all 0.3s; transform-origin: center;">
-                    <div style="font-size: 26px; font-weight: 800; color: white;">Pellet Feed</div>
-                    <div class="cmp-mineral-badge" style="font-size: 22px; padding: 12px 30px;">Fe Mín. 63%</div>
+                <div class="cmp-mineral-product-card">
+                    <div class="cmp-mineral-product-inner">
+                        <div class="cmp-mineral-product-icon"><i class="ph ph-stack"></i></div>
+                        <div class="cmp-mineral-product-name">Pellet Feed</div>
+                        <div class="cmp-mineral-product-spec">Fe Mín. 63%</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1288,7 +1474,7 @@
             <div class="cmp-process-timeline">
                 <div class="cmp-process-step">
                     <div class="cmp-process-icon-wrap">
-                        <div class="cmp-process-icon-bg"><i class="ph ph-file-text" style="color: white;"></i></div>
+                        <div class="cmp-process-icon-bg"><i class="ph ph-pen-nib" style="color: white;"></i></div>
                         <div class="cmp-process-num">1</div>
                     </div>
                     <h3>Formulario online</h3>
@@ -1299,7 +1485,7 @@
                 </div>
                 <div class="cmp-process-step">
                     <div class="cmp-process-icon-wrap">
-                        <div class="cmp-process-icon-bg"><i class="ph ph-flask" style="color: white;"></i></div>
+                        <div class="cmp-process-icon-bg"><i class="ph ph-microscope" style="color: white;"></i></div>
                         <div class="cmp-process-num">2</div>
                     </div>
                     <h3>Análisis de muestra</h3>
@@ -1310,7 +1496,7 @@
                 </div>
                 <div class="cmp-process-step">
                     <div class="cmp-process-icon-wrap">
-                        <div class="cmp-process-icon-bg"><i class="ph ph-handshake" style="color: white;"></i></div>
+                        <div class="cmp-process-icon-bg"><i class="ph ph-scroll" style="color: white;"></i></div>
                         <div class="cmp-process-num">3</div>
                     </div>
                     <h3>Reunión y contrato</h3>
