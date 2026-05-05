@@ -1193,22 +1193,58 @@
         }
 
         .cmp-btn-large {
-            background: var(--cmp-gold);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background: linear-gradient(110deg, #F5A623 0%, #FFC857 45%, #F5A623 55%, #E8941A 100%);
+            background-size: 220% 100%;
             color: var(--text-dark);
             padding: 18px 48px;
             border-radius: 10px;
             font-weight: 800;
             font-size: 16px;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 6px 24px rgba(245, 166, 35, 0.4);
+            animation: cmp-btn-pulse 2.8s ease-in-out infinite,
+                cmp-btn-glow 5.5s linear infinite;
+        }
+
+        .cmp-btn-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(100deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.55) 50%,
+                    transparent 100%);
+            transform: skewX(-22deg);
+            animation: cmp-btn-shine 4.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cmp-btn-large > * {
+            position: relative;
+            z-index: 1;
         }
 
         .cmp-btn-large:hover {
-            background: white;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+            animation-play-state: paused;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 40px rgba(245, 166, 35, 0.55);
             color: var(--text-dark);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .cmp-btn-large,
+            .cmp-btn-large::before {
+                animation: none;
+            }
         }
 
         /* ── CONTACTO ── */
@@ -1532,7 +1568,7 @@
                         explotes</strong> de estas concesiones.
                 </p>
 
-                <a href="#arriendo" class="cmp-btn-gold" style="display: inline-block; margin-top: 10px;"><i
+                <a href="#arriendo" class="cmp-btn-gold cmp-btn-primary" style="display: inline-block; margin-top: 10px;"><i
                         class="ph ph-map-pin"
                         style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 4px;"></i> Regístrate con
                     una concesión minera que te interese</a>
