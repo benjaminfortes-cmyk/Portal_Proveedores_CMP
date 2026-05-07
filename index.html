@@ -1532,6 +1532,446 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* ── MAPA INTERACTIVO DE CONCESIONES ── */
+        .cmp-mapa-section {
+            background: white;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cmp-mapa-section::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.06), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cmp-mapa-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .cmp-mapa-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .cmp-mapa-header h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(28px, 3.5vw, 46px);
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        .cmp-mapa-header p {
+            color: var(--gray-text);
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .cmp-beta-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cmp-gold), #d68a14);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 5px 11px;
+            border-radius: 5px;
+            margin-left: 10px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(245, 166, 35, 0.4);
+            animation: cmp-beta-pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes cmp-beta-pulse {
+            0%, 100% { box-shadow: 0 2px 8px rgba(245, 166, 35, 0.4); }
+            50% { box-shadow: 0 2px 16px rgba(245, 166, 35, 0.7); }
+        }
+
+        .cmp-mapa-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .cmp-mapa-svg-wrap {
+            position: relative;
+            background: linear-gradient(180deg, #f4f9ff 0%, #e7f0fa 100%);
+            border-radius: 16px;
+            padding: 24px 16px;
+            border: 1px solid #dde7f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 460px;
+        }
+
+        .cmp-mapa-svg {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(0, 47, 108, 0.08));
+        }
+
+        .cmp-mapa-region-group {
+            cursor: pointer;
+        }
+
+        .cmp-mapa-region {
+            fill: transparent;
+            transition: fill 0.3s ease;
+        }
+
+        .cmp-mapa-region-group:hover .cmp-mapa-region,
+        .cmp-mapa-region-group.hover-sync .cmp-mapa-region {
+            fill: rgba(0, 102, 204, 0.55);
+        }
+
+        .cmp-mapa-region-group.active .cmp-mapa-region,
+        .cmp-mapa-region-group.active.hover-sync .cmp-mapa-region {
+            fill: rgba(26, 160, 60, 0.72);
+        }
+
+        .cmp-mapa-region-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            fill: var(--cmp-darker);
+            pointer-events: none;
+            text-anchor: start;
+            transition: fill 0.25s ease;
+        }
+
+        .cmp-mapa-region-group.active .cmp-mapa-region-label,
+        .cmp-mapa-region-group:hover .cmp-mapa-region-label,
+        .cmp-mapa-region-group.hover-sync .cmp-mapa-region-label {
+            fill: var(--cmp-darker);
+            font-weight: 800;
+        }
+
+        .cmp-mapa-region-group.active .cmp-mapa-region-leader,
+        .cmp-mapa-region-group:hover .cmp-mapa-region-leader,
+        .cmp-mapa-region-group.hover-sync .cmp-mapa-region-leader {
+            opacity: 1;
+            stroke: var(--cmp-blue);
+            stroke-dasharray: none;
+        }
+
+        .cmp-mapa-region-group.active .cmp-mapa-region-leader {
+            stroke: #1aa03c;
+        }
+
+        .cmp-mapa-region-leader {
+            stroke: var(--cmp-blue);
+            stroke-width: 1;
+            stroke-dasharray: 2,2;
+            opacity: 0.5;
+            fill: none;
+            pointer-events: none;
+        }
+
+        .cmp-mapa-compass {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            fill: var(--cmp-darker);
+            opacity: 0.55;
+        }
+
+        .cmp-mapa-ocean-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            fill: var(--cmp-blue);
+            opacity: 0.45;
+            font-style: italic;
+            letter-spacing: 1.5px;
+        }
+
+        .cmp-mapa-panel {
+            background: var(--gray-bg);
+            border-radius: 16px;
+            padding: 32px;
+            min-height: 460px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e5edf6;
+        }
+
+        .cmp-mapa-empty {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--gray-text);
+            padding: 20px;
+        }
+
+        .cmp-mapa-empty-icon {
+            font-size: 64px;
+            color: var(--cmp-blue);
+            opacity: 0.45;
+            margin-bottom: 18px;
+            animation: cmp-empty-bob 2.6s ease-in-out infinite;
+        }
+
+        @keyframes cmp-empty-bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .cmp-mapa-empty h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .cmp-mapa-empty p {
+            font-size: 14px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .cmp-mapa-content {
+            animation: cmp-mapa-fade 0.4s ease;
+        }
+
+        @keyframes cmp-mapa-fade {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cmp-mapa-content .region-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cmp-darker);
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+
+        .cmp-mapa-content .region-meta {
+            font-size: 13px;
+            color: var(--gray-text);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cmp-mapa-content .region-meta-pill {
+            background: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--cmp-darker);
+            font-size: 11px;
+            border: 1px solid #d8e4f0;
+        }
+
+        .cmp-concesion-card {
+            background: var(--cmp-blue);
+            border-radius: 14px;
+            padding: 20px 22px;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            color: white;
+        }
+
+        .cmp-concesion-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(0, 102, 204, 0.35);
+        }
+
+        .cmp-concesion-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .cmp-concesion-info h4 {
+            font-size: 15px;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 4px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .cmp-concesion-info-list {
+            font-size: 12.5px;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.6;
+        }
+
+        .cmp-concesion-info-list strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        .cmp-concesion-cta {
+            background: white;
+            color: var(--cmp-darker);
+            font-weight: 800;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .cmp-concesion-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            background: #f4f9ff;
+        }
+
+        .cmp-mapa-comunas {
+            margin-top: 18px;
+            padding: 20px 22px;
+            background: var(--cmp-blue);
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
+        }
+
+        .cmp-mapa-comunas-title {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: white;
+            margin-bottom: 12px;
+            opacity: 0.95;
+        }
+
+        .cmp-mapa-comunas-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .cmp-mapa-comuna-tag {
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            font-size: 11px;
+            padding: 5px 11px;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .cmp-mapa-comuna-tag:hover {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .cmp-mapa-no-data {
+            background: #fff8e6;
+            border: 1px dashed #f3c66a;
+            padding: 26px 22px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--gray-text);
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        .cmp-mapa-no-data i {
+            font-size: 32px;
+            color: var(--cmp-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .cmp-mapa-no-data strong {
+            color: var(--text-dark);
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .cmp-mapa-disclaimer {
+            margin-top: 32px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-text);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .cmp-mapa-disclaimer i {
+            color: var(--cmp-gold);
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .cmp-mapa-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .cmp-mapa-section {
+                padding: 60px 24px;
+            }
+            .cmp-mapa-svg {
+                max-width: 320px;
+            }
+            .cmp-mapa-svg-wrap {
+                min-height: auto;
+                padding: 20px 12px;
+            }
+            .cmp-mapa-panel {
+                min-height: auto;
+                padding: 24px;
+            }
+            .cmp-concesion-card {
+                grid-template-columns: auto 1fr;
+                row-gap: 12px;
+            }
+            .cmp-concesion-cta {
+                grid-column: 1 / -1;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -1729,6 +2169,109 @@
         </div>
     </div>
 
+    <!-- MAPA INTERACTIVO DE CONCESIONES -->
+    <div class="cmp-mapa-section" id="mapa-concesiones">
+        <div class="cmp-mapa-inner">
+            <div class="cmp-mapa-header">
+                <div class="cmp-section-label" style="justify-content: center; display: flex; align-items: center;">
+                    <i class="ph ph-map-trifold" style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 4px;"></i>
+                    Explora por región
+                    <span class="cmp-beta-badge">Beta</span>
+                </div>
+                <h2>Mapa de Concesiones Disponibles</h2>
+                <p>Selecciona una región del norte de Chile para conocer las concesiones mineras que tenemos disponibles para arriendo. Una nueva forma de descubrir oportunidades, directo desde el mapa.</p>
+            </div>
+
+            <div class="cmp-mapa-grid">
+                <!-- SVG MAP — imagen del norte de Chile (sin fondo) + máscara alpha -->
+                <div class="cmp-mapa-svg-wrap">
+                    <svg class="cmp-mapa-svg" viewBox="0 0 360 440" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa interactivo del norte de Chile">
+                        <defs>
+                            <!-- Máscara alpha: usa el canal alpha del PNG sin fondo -->
+                            <mask id="cmpChileMask" mask-type="alpha">
+                                <image href="./chile-norte.png" x="20" y="20" width="240" height="400" preserveAspectRatio="xMidYMin meet"/>
+                            </mask>
+                        </defs>
+
+                        <!-- Capa visual: imagen real del norte de Chile -->
+                        <image href="./chile-norte.png" x="20" y="20" width="240" height="400" preserveAspectRatio="xMidYMin meet"/>
+
+                        <!-- Brújula -->
+                        <g transform="translate(330, 30)">
+                            <circle cx="0" cy="0" r="14" fill="white" stroke="#cfdcec" stroke-width="1.5"/>
+                            <path d="M 0 -9 L 4 0 L 0 9 L -4 0 Z" fill="#0066CC"/>
+                            <text class="cmp-mapa-compass" x="0" y="-18" text-anchor="middle">N</text>
+                        </g>
+
+                        <!-- Etiqueta océano -->
+                        <text class="cmp-mapa-ocean-label" x="12" y="210" transform="rotate(-90, 12, 210)">OCÉANO PACÍFICO</text>
+
+                        <!-- Capa de regiones clickeables — recortadas a la silueta por máscara alpha -->
+                        <g mask="url(#cmpChileMask)">
+                            <g class="cmp-mapa-region-group" data-region="arica">
+                                <rect class="cmp-mapa-region" x="0" y="20" width="360" height="43"/>
+                            </g>
+                            <g class="cmp-mapa-region-group" data-region="tarapaca">
+                                <rect class="cmp-mapa-region" x="0" y="63" width="360" height="47"/>
+                            </g>
+                            <g class="cmp-mapa-region-group" data-region="antofagasta">
+                                <rect class="cmp-mapa-region" x="0" y="110" width="360" height="119"/>
+                            </g>
+                            <g class="cmp-mapa-region-group" data-region="atacama">
+                                <rect class="cmp-mapa-region" x="0" y="229" width="360" height="32"/>
+                            </g>
+                            <g class="cmp-mapa-region-group" data-region="coquimbo">
+                                <rect class="cmp-mapa-region" x="0" y="261" width="360" height="119"/>
+                            </g>
+                        </g>
+
+                        <!-- Etiquetas + leaders (no enmascaradas, también clickeables) -->
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="arica" style="cursor:pointer;">
+                            <rect x="270" y="30" width="90" height="28" fill="transparent"/>
+                            <line class="cmp-mapa-region-leader" x1="216" y1="40" x2="274" y2="40"/>
+                            <text class="cmp-mapa-region-label" x="276" y="38">Arica y</text>
+                            <text class="cmp-mapa-region-label" x="276" y="51">Parinacota</text>
+                        </g>
+
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="tarapaca" style="cursor:pointer;">
+                            <rect x="270" y="78" width="90" height="18" fill="transparent"/>
+                            <line class="cmp-mapa-region-leader" x1="186" y1="86" x2="274" y2="86"/>
+                            <text class="cmp-mapa-region-label" x="276" y="90">Tarapacá</text>
+                        </g>
+
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="antofagasta" style="cursor:pointer;">
+                            <rect x="270" y="162" width="90" height="18" fill="transparent"/>
+                            <line class="cmp-mapa-region-leader" x1="246" y1="170" x2="274" y2="170"/>
+                            <text class="cmp-mapa-region-label" x="276" y="174">Antofagasta</text>
+                        </g>
+
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="atacama" style="cursor:pointer;">
+                            <rect x="270" y="238" width="90" height="18" fill="transparent"/>
+                            <line class="cmp-mapa-region-leader" x1="200" y1="246" x2="274" y2="246"/>
+                            <text class="cmp-mapa-region-label" x="276" y="250">Atacama</text>
+                        </g>
+
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="coquimbo" style="cursor:pointer;">
+                            <rect x="270" y="312" width="90" height="18" fill="transparent"/>
+                            <line class="cmp-mapa-region-leader" x1="180" y1="320" x2="274" y2="320"/>
+                            <text class="cmp-mapa-region-label" x="276" y="324">Coquimbo</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- INFO PANEL -->
+                <div class="cmp-mapa-panel" id="cmp-mapa-panel">
+                    <div class="cmp-mapa-empty" id="cmp-mapa-empty">
+                        <i class="ph ph-cursor-click cmp-mapa-empty-icon"></i>
+                        <h3>Selecciona una región</h3>
+                        <p>Haz clic en cualquier región del mapa para ver las concesiones mineras disponibles y las comunas donde operamos.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- PROCESO -->
     <div class="cmp-process" id="proceso">
         <div class="cmp-process-inner">
@@ -1871,6 +2414,130 @@
             derechos reservados</span>
         <span style="color:rgba(255,255,255,0.3); font-size:14px; font-weight:700; letter-spacing:2px;">CMP</span>
     </div>
+
+    <!-- MAPA INTERACTIVO — LÓGICA -->
+    <script>
+        (function () {
+            const QUALTRICS_URL = 'https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_eRNMhbvPVHHACt8';
+
+            // Datos referenciales — REEMPLAZAR con la cartera oficial cuando esté disponible
+            const concesiones = {
+                arica: {
+                    nombre: 'Región de Arica y Parinacota',
+                    comunas: ['Arica', 'Camarones', 'Putre', 'General Lagos'],
+                    items: []
+                },
+                tarapaca: {
+                    nombre: 'Región de Tarapacá',
+                    comunas: ['Iquique', 'Alto Hospicio', 'Pozo Almonte', 'Pica', 'Huara', 'Camiña', 'Colchane'],
+                    items: []
+                },
+                antofagasta: {
+                    nombre: 'Región de Antofagasta',
+                    comunas: ['Antofagasta', 'Mejillones', 'Sierra Gorda', 'Taltal', 'Tocopilla', 'María Elena', 'Calama', 'San Pedro de Atacama', 'Ollagüe'],
+                    items: [
+                        { nombre: 'Concesión Demo Norte', comuna: 'Taltal', yacimiento: 'Pequeña', mineral: 'Fe', escala: 'Pequeña' }
+                    ]
+                },
+                atacama: {
+                    nombre: 'Región de Atacama',
+                    comunas: ['Copiapó', 'Caldera', 'Tierra Amarilla', 'Chañaral', 'Diego de Almagro', 'Vallenar', 'Huasco', 'Freirina', 'Alto del Carmen'],
+                    items: [
+                        { nombre: 'Concesión Demo Atacama A', comuna: 'Chañaral', yacimiento: 'Pequeña', mineral: 'Fe', escala: 'Pequeña' },
+                        { nombre: 'Concesión Demo Atacama B', comuna: 'Vallenar', yacimiento: 'Mediana', mineral: 'Fe', escala: 'Mediana' }
+                    ]
+                },
+                coquimbo: {
+                    nombre: 'Región de Coquimbo',
+                    comunas: ['La Serena', 'Coquimbo', 'Andacollo', 'Vicuña', 'Paihuano', 'La Higuera', 'Ovalle', 'Combarbalá', 'Monte Patria', 'Punitaqui', 'Río Hurtado', 'Illapel', 'Salamanca', 'Los Vilos', 'Canela'],
+                    items: []
+                }
+            };
+
+            const panel = document.getElementById('cmp-mapa-panel');
+            if (!panel) return;
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+            }
+
+            function renderRegion(key) {
+                const data = concesiones[key];
+                if (!data) return;
+
+                const totalItems = data.items.length;
+                const totalComunas = data.comunas.length;
+
+                let html = '<div class="cmp-mapa-content">';
+                html += '<h3 class="region-title">' + escapeHtml(data.nombre) + '</h3>';
+                html += '<div class="region-meta">';
+                html += '<span class="region-meta-pill"><i class="ph ph-stack" style="vertical-align: text-bottom;"></i> ' + totalItems + ' ' + (totalItems === 1 ? 'concesión' : 'concesiones') + '</span>';
+                html += '<span class="region-meta-pill"><i class="ph ph-map-pin" style="vertical-align: text-bottom;"></i> ' + totalComunas + ' comunas</span>';
+                html += '</div>';
+
+                if (totalItems === 0) {
+                    html += '<div class="cmp-mapa-no-data">';
+                    html += '<i class="ph ph-clock-countdown"></i>';
+                    html += '<strong>Próximamente</strong>';
+                    html += 'Aún no tenemos concesiones publicadas en esta región. Si te interesa operar aquí, déjanos tus datos y te avisaremos cuando estén disponibles.';
+                    html += '<div style="margin-top: 14px;"><a href="' + QUALTRICS_URL + '" class="cmp-concesion-cta" target="_blank" rel="noopener">Notificarme</a></div>';
+                    html += '</div>';
+                } else {
+                    data.items.forEach(item => {
+                        html += '<div class="cmp-concesion-card">';
+                        html += '<div class="cmp-concesion-icon"><i class="ph ph-mountains"></i></div>';
+                        html += '<div class="cmp-concesion-info">';
+                        html += '<h4>' + escapeHtml(item.nombre) + '</h4>';
+                        html += '<div class="cmp-concesion-info-list">';
+                        html += '<strong>Comuna:</strong> ' + escapeHtml(item.comuna) + '<br>';
+                        html += '<strong>Yacimiento:</strong> ' + escapeHtml(item.yacimiento) + ' · <strong>Mineral:</strong> ' + escapeHtml(item.mineral) + '<br>';
+                        html += '<strong>Escala de minería:</strong> ' + escapeHtml(item.escala);
+                        html += '</div></div>';
+                        html += '<a href="' + QUALTRICS_URL + '" class="cmp-concesion-cta" target="_blank" rel="noopener">Postular</a>';
+                        html += '</div>';
+                    });
+                }
+
+                html += '<div class="cmp-mapa-comunas">';
+                html += '<div class="cmp-mapa-comunas-title"><i class="ph ph-map-pin-line" style="vertical-align: text-bottom;"></i> Comunas en la región</div>';
+                html += '<div class="cmp-mapa-comunas-list">';
+                data.comunas.forEach(c => {
+                    html += '<span class="cmp-mapa-comuna-tag">' + escapeHtml(c) + '</span>';
+                });
+                html += '</div></div>';
+
+                html += '</div>';
+                panel.innerHTML = html;
+            }
+
+            const regions = document.querySelectorAll('.cmp-mapa-region-group');
+            regions.forEach(el => {
+                el.setAttribute('tabindex', '0');
+                el.setAttribute('role', 'button');
+                el.setAttribute('aria-label', 'Ver concesiones en ' + (concesiones[el.dataset.region] ? concesiones[el.dataset.region].nombre : el.dataset.region));
+
+                const activate = () => {
+                    regions.forEach(r => r.classList.remove('active'));
+                    document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]')
+                        .forEach(g => g.classList.add('active'));
+                    renderRegion(el.dataset.region);
+                };
+                const setHover = (on) => {
+                    document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]')
+                        .forEach(g => g.classList.toggle('hover-sync', on));
+                };
+                el.addEventListener('click', activate);
+                el.addEventListener('mouseenter', () => setHover(true));
+                el.addEventListener('mouseleave', () => setHover(false));
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        activate();
+                    }
+                });
+            });
+        })();
+    </script>
 
 </body>
 
