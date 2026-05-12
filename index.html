@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Barlow+Condensed:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
@@ -39,64 +39,13 @@
             color: var(--text-dark);
         }
 
-        /* Secciones desde Casos de Éxito hacia abajo: todo Barlow Condensed */
-        .cmp-what,
-        .cmp-process,
-        .cmp-cta,
-        .cmp-mapa-section,
-        .cmp-contact,
-        .cmp-footer {
-            font-family: 'Barlow Condensed', sans-serif;
-        }
-
-        /* Body text mas grande para compensar que Barlow Condensed es mas angosta.
-           !important porque las reglas originales aparecen despues en el CSS */
-        .cmp-what p,
-        .cmp-what li,
-        .cmp-process p,
-        .cmp-process-step p,
-        .cmp-cta p,
-        .cmp-mapa-header p,
-        .cmp-mapa-empty p,
-        .cmp-contact p,
-        .cmp-footer p {
-            font-size: 20px !important;
-            line-height: 1.5 !important;
-        }
-
-        .cmp-mineral-card p,
-        .cmp-mineral-card p.cmp-mineral-sub {
-            font-size: 17px !important;
-        }
-
-        /* Override: Casos de Éxito (id="info") usa Montserrat con tamaños originales */
-        #info,
+        /* Tamaño consistente de h2 desde Casos de Éxito hacia abajo (igual a Casos de Éxito) */
         #info h2,
-        #info h3,
-        #info h4,
-        #info p,
-        #info .cmp-mineral-badge,
-        #info .cmp-mineral-card h4,
-        #info .cmp-mineral-card p {
-            font-family: 'Montserrat', sans-serif !important;
-        }
-
-        #info h2 {
+        #arriendo h2,
+        .cmp-process-header h2,
+        .cmp-cta h2,
+        .cmp-mapa-header h2 {
             font-size: clamp(24px, 2.6vw, 36px) !important;
-        }
-
-        #info p {
-            font-size: 15px !important;
-            line-height: 1.7 !important;
-        }
-
-        #info .cmp-mineral-card p,
-        #info .cmp-mineral-card p.cmp-mineral-sub {
-            font-size: 13px !important;
-        }
-
-        #info .cmp-mineral-badge {
-            font-size: 15px !important;
         }
 
         /* ── TOP BAR ── */
@@ -667,7 +616,7 @@
         }
 
         .cmp-what h2 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(28px, 3.5vw, 46px);
             font-weight: 700;
             color: var(--text-dark);
@@ -725,7 +674,7 @@
             font-weight: 800;
             padding: 6px 14px;
             border-radius: 8px;
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             text-align: center;
             min-width: 100px;
         }
@@ -806,7 +755,7 @@
         }
 
         .cmp-mineral-product-name {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 28px;
             font-weight: 800;
             color: white;
@@ -817,7 +766,7 @@
         .cmp-mineral-product-spec {
             background: white;
             color: var(--cmp-darker);
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 22px;
             font-weight: 800;
             padding: 10px 28px;
@@ -998,7 +947,7 @@
         }
 
         .cmp-process-header h2 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(28px, 3.5vw, 46px);
             font-weight: 700;
             color: var(--text-dark);
@@ -1052,7 +1001,7 @@
             position: absolute;
             top: 6px;
             right: 18px;
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 78px;
             font-weight: 800;
             line-height: 1;
@@ -1146,7 +1095,7 @@
         }
 
         .cmp-process-step h3 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 22px;
             font-weight: 700;
             color: var(--text-dark);
@@ -1325,7 +1274,7 @@
         }
 
         .cmp-payment-header h2 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(28px, 3.5vw, 46px);
             font-weight: 700;
             color: var(--text-dark);
@@ -1370,7 +1319,7 @@
         }
 
         .cmp-cta h2 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(32px, 5vw, 60px);
             font-weight: 700;
             color: white;
@@ -1625,7 +1574,7 @@
         }
 
         .cmp-mapa-header h2 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(28px, 3.5vw, 46px);
             font-weight: 700;
             color: var(--text-dark);
@@ -1709,7 +1658,7 @@
         }
 
         .cmp-mapa-region-label {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 12px;
             font-weight: 700;
             fill: var(--cmp-darker);
@@ -1747,7 +1696,7 @@
         }
 
         .cmp-mapa-compass {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 14px;
             font-weight: 800;
             fill: var(--cmp-darker);
@@ -1755,7 +1704,7 @@
         }
 
         .cmp-mapa-ocean-label {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 11px;
             font-weight: 600;
             fill: var(--cmp-blue);
@@ -1799,7 +1748,7 @@
         }
 
         .cmp-mapa-empty h3 {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 30px;
             font-weight: 700;
             color: var(--text-dark);
@@ -1822,7 +1771,7 @@
         }
 
         .cmp-mapa-content .region-title {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 32px;
             font-weight: 700;
             color: var(--cmp-darker);
@@ -1887,7 +1836,7 @@
             color: white;
             font-weight: 800;
             margin-bottom: 4px;
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.3px;
         }
 
@@ -2162,7 +2111,7 @@
                     style="font-size: 1.2em; vertical-align: text-bottom; margin-right: 6px;"></i> Nuestros
                 requerimientos</div>
             <h2
-                style="font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; color: var(--text-dark); margin-bottom: 40px;">
+                style="font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; color: var(--text-dark); margin-bottom: 40px;">
                 Minerales que estamos comprando</h2>
 
             <div class="cmp-minerals-grid">
