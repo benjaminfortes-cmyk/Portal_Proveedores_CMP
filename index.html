@@ -1722,9 +1722,30 @@
             transition: fill 0.3s ease;
         }
 
-        .cmp-mapa-region-group:hover .cmp-mapa-region,
-        .cmp-mapa-region-group.hover-sync .cmp-mapa-region {
+        .cmp-mapa-region-group:not(.is-disabled):hover .cmp-mapa-region,
+        .cmp-mapa-region-group:not(.is-disabled).hover-sync .cmp-mapa-region {
             fill: rgba(0, 102, 204, 0.55);
+        }
+
+        /* Regiones deshabilitadas — solo Atacama y Coquimbo disponibles por ahora */
+        .cmp-mapa-region-group.is-disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+        }
+
+        .cmp-mapa-region-group.is-disabled .cmp-mapa-region {
+            fill: rgba(120, 120, 120, 0.08);
+            pointer-events: none;
+        }
+
+        .cmp-mapa-region-group.is-disabled .cmp-mapa-region-label {
+            fill: rgba(0, 47, 108, 0.5);
+            font-weight: 600;
+        }
+
+        .cmp-mapa-region-group.is-disabled .cmp-mapa-region-leader {
+            stroke: rgba(0, 47, 108, 0.35);
+            opacity: 0.4;
         }
 
         .cmp-mapa-region-group.active .cmp-mapa-region,
@@ -2201,7 +2222,7 @@
             <div class="cmp-minerals-grid">
                 <div class="cmp-mineral-product-card">
                     <div class="cmp-mineral-product-inner">
-                        <div class="cmp-mineral-product-icon"><img src="./pellet.png" alt="Pellet"></div>
+                        <div class="cmp-mineral-product-icon"><img src="./sinter%20feed%20(2).png" alt="Pellet"></div>
                         <div class="cmp-mineral-product-name">PELLET FEED   </div>
                         <div class="cmp-mineral-product-spec">66% Fe Total</div>
                         <div class="cmp-mineral-product-granu">
@@ -2222,7 +2243,7 @@
 
                 <div class="cmp-mineral-product-card">
                     <div class="cmp-mineral-product-inner">
-                        <div class="cmp-mineral-product-icon"><img src="./sinter.png" alt="Sínter"></div>
+                        <div class="cmp-mineral-product-icon"><img src="./pellet%20feed%202.png" alt="Sínter"></div>
                         <div class="cmp-mineral-product-name">SÍNTER FEED</div>
                         <div class="cmp-mineral-product-spec">62% Fe Total</div>
                         <div class="cmp-mineral-product-granu">
@@ -2349,13 +2370,13 @@
 
                         <!-- Capa de regiones clickeables — recortadas a la silueta por máscara alpha -->
                         <g mask="url(#cmpChileMask)">
-                            <g class="cmp-mapa-region-group" data-region="arica">
+                            <g class="cmp-mapa-region-group is-disabled" data-region="arica" data-disabled="true">
                                 <rect class="cmp-mapa-region" x="0" y="20" width="360" height="43"/>
                             </g>
-                            <g class="cmp-mapa-region-group" data-region="tarapaca">
+                            <g class="cmp-mapa-region-group is-disabled" data-region="tarapaca" data-disabled="true">
                                 <rect class="cmp-mapa-region" x="0" y="63" width="360" height="47"/>
                             </g>
-                            <g class="cmp-mapa-region-group" data-region="antofagasta">
+                            <g class="cmp-mapa-region-group is-disabled" data-region="antofagasta" data-disabled="true">
                                 <rect class="cmp-mapa-region" x="0" y="110" width="360" height="119"/>
                             </g>
                             <g class="cmp-mapa-region-group" data-region="atacama">
@@ -2367,20 +2388,20 @@
                         </g>
 
                         <!-- Etiquetas + leaders (no enmascaradas, también clickeables) -->
-                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="arica" style="cursor:pointer;">
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone is-disabled" data-region="arica" data-disabled="true">
                             <rect x="270" y="30" width="90" height="28" fill="transparent"/>
                             <line class="cmp-mapa-region-leader" x1="216" y1="40" x2="274" y2="40"/>
                             <text class="cmp-mapa-region-label" x="276" y="38">Arica y</text>
                             <text class="cmp-mapa-region-label" x="276" y="51">Parinacota</text>
                         </g>
 
-                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="tarapaca" style="cursor:pointer;">
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone is-disabled" data-region="tarapaca" data-disabled="true">
                             <rect x="270" y="78" width="90" height="18" fill="transparent"/>
                             <line class="cmp-mapa-region-leader" x1="186" y1="86" x2="274" y2="86"/>
                             <text class="cmp-mapa-region-label" x="276" y="90">Tarapacá</text>
                         </g>
 
-                        <g class="cmp-mapa-region-group cmp-mapa-label-clone" data-region="antofagasta" style="cursor:pointer;">
+                        <g class="cmp-mapa-region-group cmp-mapa-label-clone is-disabled" data-region="antofagasta" data-disabled="true">
                             <rect x="270" y="162" width="90" height="18" fill="transparent"/>
                             <line class="cmp-mapa-region-leader" x1="246" y1="170" x2="274" y2="170"/>
                             <text class="cmp-mapa-region-label" x="276" y="174">Antofagasta</text>
@@ -2601,18 +2622,26 @@
 
             const regions = document.querySelectorAll('.cmp-mapa-region-group');
             regions.forEach(el => {
+                const isDisabled = el.dataset.disabled === 'true';
+
+                if (isDisabled) {
+                    el.setAttribute('aria-disabled', 'true');
+                    el.setAttribute('aria-label', 'Región próximamente disponible');
+                    return;
+                }
+
                 el.setAttribute('tabindex', '0');
                 el.setAttribute('role', 'button');
                 el.setAttribute('aria-label', 'Ver concesiones en ' + (concesiones[el.dataset.region] ? concesiones[el.dataset.region].nombre : el.dataset.region));
 
                 const activate = () => {
                     regions.forEach(r => r.classList.remove('active'));
-                    document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]')
+                    document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]:not(.is-disabled)')
                         .forEach(g => g.classList.add('active'));
                     renderRegion(el.dataset.region);
                 };
                 const setHover = (on) => {
-                    document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]')
+                    document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]:not(.is-disabled)')
                         .forEach(g => g.classList.toggle('hover-sync', on));
                 };
                 el.addEventListener('click', activate);
