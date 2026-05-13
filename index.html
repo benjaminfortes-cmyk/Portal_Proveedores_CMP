@@ -691,7 +691,8 @@
             border-radius: 18px;
             overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            aspect-ratio: 1 / 1.05;
+            min-height: 360px;
+            display: flex;
             box-shadow: 0 14px 38px rgba(0, 47, 108, 0.18);
         }
 
@@ -724,19 +725,19 @@
         .cmp-mineral-product-inner {
             position: relative;
             z-index: 2;
-            height: 100%;
-            padding: 36px 28px 32px;
+            width: 100%;
+            padding: 28px 22px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 18px;
+            justify-content: flex-start;
+            gap: 14px;
             text-align: center;
         }
 
         .cmp-mineral-product-icon {
-            width: 84px;
-            height: 84px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.18);
@@ -769,7 +770,7 @@
 
         .cmp-mineral-product-name {
             font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             color: white;
             letter-spacing: 0.5px;
@@ -780,12 +781,79 @@
             background: white;
             color: var(--cmp-darker);
             font-family: 'Montserrat', sans-serif;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 800;
-            padding: 10px 28px;
+            padding: 8px 22px;
             border-radius: 10px;
             box-shadow: 0 6px 18px rgba(0, 47, 108, 0.35);
             letter-spacing: 0.5px;
+        }
+
+        /* Granulometría — especificaciones físicas dentro de cada card */
+        .cmp-mineral-product-granu {
+            width: 100%;
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            padding: 12px 14px 10px;
+            backdrop-filter: blur(4px);
+        }
+
+        .cmp-mineral-product-granu-label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9.5px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.75);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .cmp-mineral-product-granu-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .cmp-mineral-product-granu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: white;
+            font-weight: 700;
+            padding: 3px 4px;
+            gap: 8px;
+        }
+
+        .cmp-mineral-product-granu-row + .cmp-mineral-product-granu-row {
+            border-top: 1px dashed rgba(255, 255, 255, 0.18);
+            padding-top: 6px;
+        }
+
+        .cmp-mineral-product-granu-size {
+            font-variant-numeric: tabular-nums;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .cmp-mineral-product-granu-val {
+            font-weight: 800;
+            color: white;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cmp-mineral-product-granu-val em {
+            font-style: normal;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-left: 5px;
         }
 
         .cmp-mineral-product-specs {
@@ -2066,8 +2134,8 @@
                 <span class="cmp-stat-lbl">Tiempo de respuesta</span>
             </div>
             <div class="cmp-stat">
-                <span class="cmp-stat-num">100%</span>
-                <span class="cmp-stat-lbl">Volumen comprado</span>
+                <span class="cmp-stat-num">66%</span>
+                <span class="cmp-stat-lbl">Fe mínimo Pellet Feed</span>
             </div>
             <div class="cmp-stat">
                 <span class="cmp-stat-num">Platts</span>
@@ -2136,6 +2204,19 @@
                         <div class="cmp-mineral-product-icon"><img src="./pellet.png" alt="Pellet"></div>
                         <div class="cmp-mineral-product-name">PELLET FEED   </div>
                         <div class="cmp-mineral-product-spec">66% Fe Total</div>
+                        <div class="cmp-mineral-product-granu">
+                            <span class="cmp-mineral-product-granu-label">Granulometría</span>
+                            <div class="cmp-mineral-product-granu-rows">
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">+0.150 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">0.50% <em>máx</em></span>
+                                </div>
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">−0.045 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">75.00% <em>mín</em></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2144,6 +2225,19 @@
                         <div class="cmp-mineral-product-icon"><img src="./sinter.png" alt="Sínter"></div>
                         <div class="cmp-mineral-product-name">SÍNTER FEED</div>
                         <div class="cmp-mineral-product-spec">62% Fe Total</div>
+                        <div class="cmp-mineral-product-granu">
+                            <span class="cmp-mineral-product-granu-label">Granulometría</span>
+                            <div class="cmp-mineral-product-granu-rows">
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">+6.50 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">2.00% <em>máx</em></span>
+                                </div>
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">−0.150 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">25.00% <em>máx</em></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2152,6 +2246,19 @@
                         <div class="cmp-mineral-product-icon"><img src="./granza.png" alt="Pre concentrado"></div>
                         <div class="cmp-mineral-product-name">PRE CONCENTRADO</div>
                         <div class="cmp-mineral-product-spec">40% Mín. Fe Magnético</div>
+                        <div class="cmp-mineral-product-granu">
+                            <span class="cmp-mineral-product-granu-label">Granulometría</span>
+                            <div class="cmp-mineral-product-granu-rows">
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">+6.50 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">5.00% <em>máx</em></span>
+                                </div>
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">−0.150 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">25.00% <em>mín</em></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2159,9 +2266,18 @@
                     <span class="cmp-mineral-product-tag">También compramos</span>
                     <div class="cmp-mineral-product-inner">
                         <div class="cmp-mineral-product-icon"><img src="./granza.png" alt="Granza"></div>
-                        
+
                         <div class="cmp-mineral-product-name">Granzas</div>
                         <div class="cmp-mineral-product-spec">Compra garantizada</div>
+                        <div class="cmp-mineral-product-granu">
+                            <span class="cmp-mineral-product-granu-label">Granulometría</span>
+                            <div class="cmp-mineral-product-granu-rows">
+                                <div class="cmp-mineral-product-granu-row">
+                                    <span class="cmp-mineral-product-granu-size">−25 mm</span>
+                                    <span class="cmp-mineral-product-granu-val">20.00% <em>máx</em></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
