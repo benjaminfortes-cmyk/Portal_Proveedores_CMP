@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutorial CSS Interactivo — Portal CMP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --cmp-blue: #0066CC;
+    --cmp-dark: #002F6C;
+    --cmp-darker: #001A47;
+    --cmp-gold: #F5A623;
+    --cmp-light: #E8F2FF;
+    --bg: #F4F7FB;
+    --surface: #FFFFFF;
+    --ink: #1A2744;
+    --muted: #6B7A99;
+    --code-bg: #0F1A30;
+    --code-text: #E2E8F0;
+    --code-comment: #6B7A99;
+    --border: #E2E8F0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header.top {
+    position: sticky;
+    top: 0;
+    background: var(--cmp-dark);
+    color: white;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 14px rgba(0,0,0,.1);
+    z-index: 100;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+header.top h1 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -.2px;
+}
+
+header.top h1 span.accent { color: var(--cmp-gold); }
+
+header.top nav {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+header.top nav a {
+    color: rgba(255,255,255,.75);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all .15s;
+}
+
+header.top nav a:hover {
+    background: rgba(255,255,255,.12);
+    color: white;
+}
+
+/* ── HERO ── */
+.hero {
+    padding: 64px 32px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--cmp-light), transparent);
+}
+
+.hero h2 {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+    line-height: 1.1;
+}
+
+.hero h2 em {
+    font-style: normal;
+    color: var(--cmp-blue);
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* ── MAIN ── */
+main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+}
+
+.section {
+    background: var(--surface);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0, 47, 108, .06);
+    padding: 36px 36px 32px;
+    margin-bottom: 28px;
+    border: 1px solid var(--border);
+    scroll-margin-top: 80px;
+}
+
+.section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--cmp-blue);
+    color: white;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.section h3 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -.3px;
+}
+
+.section .intro {
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+.section .intro code,
+.section .tip code,
+.section .note code {
+    background: var(--cmp-light);
+    color: var(--cmp-dark);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ── PLAYGROUND ── */
+.play {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+}
+
+@media (max-width: 720px) {
+    .play { grid-template-columns: 1fr; }
+}
+
+.play-controls {
+    background: linear-gradient(180deg, #F8FAFC, #F1F5F9);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.play-stage {
+    background: repeating-linear-gradient(45deg, #F8FAFC, #F8FAFC 10px, #EDF2F7 10px, #EDF2F7 20px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    overflow: hidden;
+}
+
+.note {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 14px;
+}
+
+/* ── CONTROLS ── */
+.control { margin-bottom: 16px; }
+.control:last-child { margin-bottom: 0; }
+
+.control label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.control label .val {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--cmp-dark);
+    color: var(--cmp-gold);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.control input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #DCE3EC;
+    border-radius: 3px;
+    outline: none;
+}
+
+.control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--cmp-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,102,204,.35);
+    transition: transform .15s;
+}
+
+.control input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+.control input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--cmp-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,102,204,.35);
+}
+
+.control input[type="color"] {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.btn-row button {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all .15s;
+}
+
+.btn-row button:hover {
+    border-color: var(--cmp-blue);
+    color: var(--cmp-blue);
+}
+
+.btn-row button.active {
+    background: var(--cmp-blue);
+    color: white;
+    border-color: var(--cmp-blue);
+}
+
+/* ── CODE ── */
+.code {
+    margin-top: 18px;
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 18px 20px;
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.code .sel { color: #80E27E; }
+.code .prop { color: #82B1FF; }
+.code .v { color: var(--cmp-gold); font-weight: 600; }
+.code .cm { color: var(--code-comment); font-style: italic; }
+.code .pn { color: #94A3B8; }
+.code .live {
+    background: rgba(245, 166, 35, .15);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+/* ── TIP / NOTE BOXES ── */
+.tip {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: var(--cmp-light);
+    border-left: 4px solid var(--cmp-blue);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: var(--cmp-dark);
+}
+
+/* ── DEMO STAGES (each section specific) ── */
+.demo-box {
+    background: var(--cmp-blue);
+    color: white;
+    padding: 24px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    transition: all .25s;
+}
+
+/* Section: padding */
+#padding-stage .outer {
+    background: rgba(245, 166, 35, .35);
+    border: 1.5px dashed var(--cmp-gold);
+    border-radius: 8px;
+    display: inline-block;
+    transition: padding .15s;
+}
+#padding-stage .inner {
+    background: var(--cmp-blue);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+/* Section: variables */
+#vars-stage .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+}
+#vars-stage .swatch {
+    aspect-ratio: 1;
+    background: var(--demo-color, #0066CC);
+    border-radius: 8px;
+    transition: all .25s;
+}
+#vars-stage .swatch:nth-child(2) { border-radius: 50%; }
+#vars-stage .swatch:nth-child(3) { transform: rotate(12deg); }
+#vars-stage .swatch:nth-child(5) { opacity: .45; }
+#vars-stage .swatch:nth-child(6) {
+    background: transparent;
+    border: 4px solid var(--demo-color, #0066CC);
+}
+
+/* Section: flex */
+#flex-stage .container {
+    display: flex;
+    width: 100%;
+    height: 170px;
+    background: rgba(255,255,255,.8);
+    border: 1.5px dashed var(--cmp-blue);
+    border-radius: 8px;
+    padding: 10px;
+    gap: 8px;
+    transition: all .25s;
+}
+#flex-stage .item {
+    background: var(--cmp-blue);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+}
+#flex-stage .item.gold { background: var(--cmp-gold); color: var(--cmp-darker); }
+#flex-stage .item.dark { background: var(--cmp-dark); }
+
+/* Section: hover */
+#hover-stage { padding: 50px 30px; }
+#hover-stage .btn-cta {
+    background: var(--cmp-blue);
+    color: white;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .3px;
+    transition: all .25s ease;
+}
+
+/* Section: media */
+#media-stage .vp-wrap {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+#media-stage .vp-frame {
+    background: white;
+    transition: max-width .2s;
+    margin: 0 auto;
+    border-left: 2px dashed var(--cmp-blue);
+    border-right: 2px dashed var(--cmp-blue);
+    padding: 18px 14px;
+}
+#media-stage .mini-grid {
+    display: grid;
+    gap: 8px;
+}
+#media-stage .tile {
+    background: var(--cmp-blue);
+    color: white;
+    padding: 14px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: .5px;
+}
+
+/* ── FOOTER ── */
+footer.bottom {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 20px;
+    font-size: 13px;
+}
+
+footer.bottom a {
+    color: var(--cmp-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer.bottom a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+    .hero { padding: 40px 20px 30px; }
+    .hero h2 { font-size: 28px; }
+    .section { padding: 26px 22px; }
+    main { padding: 16px 12px 40px; }
+    header.top { padding: 10px 16px; }
+    header.top h1 { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+    <h1>Tutorial CSS <span class="accent">Interactivo</span></h1>
+    <nav>
+        <a href="#variables">Variables</a>
+        <a href="#padding">Padding</a>
+        <a href="#radius">Bordes</a>
+        <a href="#shadow">Sombras</a>
+        <a href="#flex">Flexbox</a>
+        <a href="#hover">Hover</a>
+        <a href="#media">Responsive</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <h2>Aprende CSS <em>moviendo cosas</em></h2>
+    <p>Cada propiedad explicada con un demo en vivo. Mueve los controles, mira el cambio, lee el código de abajo. Todo lo que ves acá lo usas en tu Portal Proveedores.</p>
+</div>
+
+<main>
+
+    <!-- ────── 1. VARIABLES ────── -->
+    <section class="section" id="variables">
+        <div class="section-num">1</div>
+        <h3>Variables CSS — el "catálogo de valores"</h3>
+        <p class="intro">Una variable CSS guarda un valor (color, número, lo que sea) bajo un nombre que empieza con <code>--</code>. Después la usas con <code>var(--nombre)</code>. Si cambias la variable, cambia todo lo que la usa. Esto es exactamente lo que hace tu portal con <code>--cmp-blue</code>.</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>--demo-color <span class="val" id="vars-val">#0066CC</span></label>
+                    <input type="color" id="vars-picker" value="#0066CC">
+                </div>
+                <p class="note">Mueve el color. Las 6 figuras de la derecha usan TODAS la misma variable como <code>background</code>. Cambias UN valor, cambian TODAS.</p>
+            </div>
+            <div class="play-stage" id="vars-stage">
+                <div class="swatch-grid">
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code"><span class="sel">:root</span> <span class="pn">{</span>
+  <span class="prop">--demo-color</span><span class="pn">:</span> <span class="v live" id="vars-code">#0066CC</span><span class="pn">;</span>
+<span class="pn">}</span>
+
+<span class="sel">.swatch</span> <span class="pn">{</span>
+  <span class="prop">background</span><span class="pn">:</span> <span class="v">var(--demo-color)</span><span class="pn">;</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>En tu portal:</strong> tienes <code>--cmp-blue</code>, <code>--cmp-gold</code>, <code>--cmp-dark</code> definidas al principio del CSS. Cada vez que ves <code>var(--cmp-blue)</code> en una regla, el navegador lo reemplaza por <code>#0066CC</code>. Limpio y centralizado.</div>
+    </section>
+
+    <!-- ────── 2. PADDING ────── -->
+    <section class="section" id="padding">
+        <div class="section-num">2</div>
+        <h3>Padding — el espacio interior</h3>
+        <p class="intro">El <code>padding</code> es el "colchón" entre el borde del elemento y su contenido. Más padding = el elemento respira más. Sin padding, el texto queda pegado a los bordes y se ve apretado.</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>Padding vertical <span class="val" id="pad-y-val">20px</span></label>
+                    <input type="range" id="pad-y" min="0" max="60" value="20">
+                </div>
+                <div class="control">
+                    <label>Padding horizontal <span class="val" id="pad-x-val">30px</span></label>
+                    <input type="range" id="pad-x" min="0" max="80" value="30">
+                </div>
+                <p class="note">La zona <strong style="color:var(--cmp-gold);">naranja punteada</strong> es el padding. El azul es el contenido real.</p>
+            </div>
+            <div class="play-stage" id="padding-stage">
+                <div class="outer" id="pad-outer">
+                    <div class="inner">CONTENIDO</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code"><span class="sel">.boton</span> <span class="pn">{</span>
+  <span class="prop">padding</span><span class="pn">:</span> <span class="v live" id="pad-code">20px 30px</span><span class="pn">;</span>  <span class="cm">/* vertical | horizontal */</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>Atajos:</strong> <code>padding: 20px</code> = 20px en los 4 lados. <code>padding: 20px 30px</code> = vertical 20, horizontal 30. <code>padding: 10px 20px 30px 40px</code> = arriba, derecha, abajo, izquierda (sentido del reloj desde arriba).</div>
+    </section>
+
+    <!-- ────── 3. BORDER-RADIUS ────── -->
+    <section class="section" id="radius">
+        <div class="section-num">3</div>
+        <h3>Border-radius — redondear esquinas</h3>
+        <p class="intro">Suaviza las esquinas del elemento. <code>0px</code> = esquinas en 90 grados (cuadrado). Un número alto = píldora. <code>50%</code> = círculo perfecto (si el elemento es cuadrado).</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>border-radius <span class="val" id="rad-val">8px</span></label>
+                    <input type="range" id="rad-slider" min="0" max="100" value="8">
+                </div>
+                <div class="btn-row" id="rad-presets" style="margin-top:12px;">
+                    <button data-v="0">0 (cuadrado)</button>
+                    <button data-v="8" class="active">8px</button>
+                    <button data-v="20">20px</button>
+                    <button data-v="100">100px (píldora)</button>
+                </div>
+            </div>
+            <div class="play-stage">
+                <div class="demo-box" id="rad-demo" style="width:180px; height:120px; display:flex; align-items:center; justify-content:center; font-size:18px;">CMP</div>
+            </div>
+        </div>
+
+        <div class="code"><span class="sel">.tarjeta</span> <span class="pn">{</span>
+  <span class="prop">border-radius</span><span class="pn">:</span> <span class="v live" id="rad-code">8px</span><span class="pn">;</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>En tu portal:</strong> tu botón <code>.cmp-nav-cta</code> usa <code>border-radius: 8px</code>. Tus tarjetas de regiones usan radios más grandes (12-16px) para sentirse más amigables. Más radio = más "suave"; menos radio = más "serio/corporativo".</div>
+    </section>
+
+    <!-- ────── 4. BOX-SHADOW ────── -->
+    <section class="section" id="shadow">
+        <div class="section-num">4</div>
+        <h3>Box-shadow — sombras que dan profundidad</h3>
+        <p class="intro">Hace que el elemento "flote" sobre el fondo. Tiene 4 ingredientes: cuánto se desplaza la sombra en X, cuánto en Y, qué tan difuminada está, y qué tan oscura es.</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>Desplazamiento X <span class="val" id="sh-x-val">0px</span></label>
+                    <input type="range" id="sh-x" min="-30" max="30" value="0">
+                </div>
+                <div class="control">
+                    <label>Desplazamiento Y <span class="val" id="sh-y-val">6px</span></label>
+                    <input type="range" id="sh-y" min="-30" max="30" value="6">
+                </div>
+                <div class="control">
+                    <label>Difuminado <span class="val" id="sh-b-val">20px</span></label>
+                    <input type="range" id="sh-b" min="0" max="60" value="20">
+                </div>
+                <div class="control">
+                    <label>Opacidad <span class="val" id="sh-o-val">0.25</span></label>
+                    <input type="range" id="sh-o" min="0" max="100" value="25">
+                </div>
+            </div>
+            <div class="play-stage">
+                <div class="demo-box" id="sh-demo" style="width:160px; height:120px; display:flex; align-items:center; justify-content:center;">SOMBRA</div>
+            </div>
+        </div>
+
+        <div class="code"><span class="sel">.tarjeta</span> <span class="pn">{</span>
+  <span class="prop">box-shadow</span><span class="pn">:</span> <span class="v live" id="sh-code">0 6px 20px rgba(0,0,0,0.25)</span><span class="pn">;</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>Tip de diseño:</strong> sombras sutiles (opacidad menor a 0.15) se ven profesionales. Sombras muy oscuras se ven amateur. Tu navbar usa opacidad 0.08 — casi nada, pero suficiente para separarlo visualmente del contenido.</div>
+    </section>
+
+    <!-- ────── 5. FLEXBOX ────── -->
+    <section class="section" id="flex">
+        <div class="section-num">5</div>
+        <h3>Flexbox — alinear elementos en fila</h3>
+        <p class="intro">Cuando un contenedor tiene <code>display: flex</code>, sus hijos se ponen en fila automáticamente. Después decides cómo distribuirlos con <code>justify-content</code> (eje horizontal) y <code>align-items</code> (eje vertical).</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>justify-content (horizontal)</label>
+                    <div class="btn-row" id="flex-justify">
+                        <button data-v="flex-start" class="active">flex-start</button>
+                        <button data-v="center">center</button>
+                        <button data-v="flex-end">flex-end</button>
+                        <button data-v="space-between">space-between</button>
+                        <button data-v="space-around">space-around</button>
+                    </div>
+                </div>
+                <div class="control" style="margin-top:18px;">
+                    <label>align-items (vertical)</label>
+                    <div class="btn-row" id="flex-align">
+                        <button data-v="flex-start">flex-start</button>
+                        <button data-v="center" class="active">center</button>
+                        <button data-v="flex-end">flex-end</button>
+                        <button data-v="stretch">stretch</button>
+                    </div>
+                </div>
+            </div>
+            <div class="play-stage" id="flex-stage">
+                <div class="container" id="flex-container">
+                    <div class="item">A</div>
+                    <div class="item gold">B</div>
+                    <div class="item dark">C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code"><span class="sel">.contenedor</span> <span class="pn">{</span>
+  <span class="prop">display</span><span class="pn">:</span> <span class="v">flex</span><span class="pn">;</span>
+  <span class="prop">justify-content</span><span class="pn">:</span> <span class="v live" id="flex-j-code">flex-start</span><span class="pn">;</span>
+  <span class="prop">align-items</span><span class="pn">:</span> <span class="v live" id="flex-a-code">center</span><span class="pn">;</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>Regla mental:</strong> <code>justify-content</code> = eje principal (horizontal por defecto). <code>align-items</code> = eje cruzado (vertical por defecto). Tu <code>.cmp-navbar</code> usa <code>space-between</code> para mandar el logo a la izquierda y los links a la derecha.</div>
+    </section>
+
+    <!-- ────── 6. HOVER + TRANSITION ────── -->
+    <section class="section" id="hover">
+        <div class="section-num">6</div>
+        <h3>:hover y transition — animar al pasar el mouse</h3>
+        <p class="intro"><code>:hover</code> es un estado: "cuando el cursor está encima". <code>transition</code> hace que los cambios entre estados ocurran suavemente, no instantáneamente. Ajusta la duración y pasa el mouse por el botón.</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>Duración <span class="val" id="hover-dur-val">0.25s</span></label>
+                    <input type="range" id="hover-dur" min="0" max="200" value="25">
+                </div>
+                <p class="note">Pasa el mouse sobre el botón "Postular ahora" →</p>
+                <p class="note"><strong>0s</strong> = cambio brusco e instantáneo (se ve amateur).<br><strong>0.2-0.3s</strong> = profesional, casi imperceptible pero suave.<br><strong>más de 1s</strong> = lento y molesto, el usuario lo siente como lag.</p>
+            </div>
+            <div class="play-stage" id="hover-stage">
+                <button class="btn-cta" id="hover-btn">Postular ahora</button>
+            </div>
+        </div>
+
+        <div class="code"><span class="sel">.boton</span> <span class="pn">{</span>
+  <span class="prop">background</span><span class="pn">:</span> <span class="v">#0066CC</span><span class="pn">;</span>
+  <span class="prop">transition</span><span class="pn">:</span> <span class="v">all</span> <span class="v live" id="hover-code">0.25s</span> <span class="v">ease</span><span class="pn">;</span>
+<span class="pn">}</span>
+
+<span class="sel">.boton:hover</span> <span class="pn">{</span>
+  <span class="prop">background</span><span class="pn">:</span> <span class="v">#002F6C</span><span class="pn">;</span>  <span class="cm">/* azul más oscuro */</span>
+  <span class="prop">transform</span><span class="pn">:</span> <span class="v">translateY(-2px)</span><span class="pn">;</span>  <span class="cm">/* sube 2px */</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>En tu portal:</strong> exactamente este patrón está en <code>.cmp-nav-cta:hover</code>. El botón cambia de color al pasar el mouse, y la animación se ve suave gracias al <code>transition: all 0.2s</code>.</div>
+    </section>
+
+    <!-- ────── 7. MEDIA QUERIES ────── -->
+    <section class="section" id="media">
+        <div class="section-num">7</div>
+        <h3>Media queries — diseño que se adapta</h3>
+        <p class="intro">Un <code>@media</code> aplica reglas solo bajo cierta condición — típicamente el ancho de la pantalla. Así un mismo sitio se ve bien en computador, tablet y celular sin escribir tres versiones. Mueve el slider para "achicar" la pantalla simulada.</p>
+
+        <div class="play">
+            <div class="play-controls">
+                <div class="control">
+                    <label>Ancho del viewport <span class="val" id="vp-val">900px</span></label>
+                    <input type="range" id="vp-slider" min="300" max="900" value="900">
+                </div>
+                <p class="note">Más de 700px → 3 columnas.<br>Entre 500 y 700px → 2 columnas.<br>Menos de 500px → 1 columna apilada.</p>
+            </div>
+            <div class="play-stage" id="media-stage">
+                <div class="vp-wrap">
+                    <div class="vp-frame" id="vp-frame">
+                        <div class="mini-grid" id="vp-grid">
+                            <div class="tile">TARJETA 1</div>
+                            <div class="tile">TARJETA 2</div>
+                            <div class="tile">TARJETA 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code"><span class="cm">/* Por defecto: 3 columnas */</span>
+<span class="sel">.grid</span> <span class="pn">{</span> <span class="prop">grid-template-columns</span><span class="pn">:</span> <span class="v">repeat(3, 1fr)</span><span class="pn">;</span> <span class="pn">}</span>
+
+<span class="cm">/* Pantallas menores a 700px: 2 columnas */</span>
+<span class="sel">@media</span> (max-width: 700px) <span class="pn">{</span>
+  <span class="sel">.grid</span> <span class="pn">{</span> <span class="prop">grid-template-columns</span><span class="pn">:</span> <span class="v">repeat(2, 1fr)</span><span class="pn">;</span> <span class="pn">}</span>
+<span class="pn">}</span>
+
+<span class="cm">/* Menores a 500px: 1 columna */</span>
+<span class="sel">@media</span> (max-width: 500px) <span class="pn">{</span>
+  <span class="sel">.grid</span> <span class="pn">{</span> <span class="prop">grid-template-columns</span><span class="pn">:</span> <span class="v">1fr</span><span class="pn">;</span> <span class="pn">}</span>
+<span class="pn">}</span></div>
+
+        <div class="tip"><strong>En tu portal:</strong> al final del CSS (líneas 1584+) tienes varios bloques <code>@media (max-width: 600px)</code> que reorganizan el navbar, el hero y el mapa para que se vean bien en celulares. Es exactamente el mismo mecanismo que estás viendo aquí, solo que con tu propio contenido.</div>
+    </section>
+
+</main>
+
+<footer class="bottom">
+    <p>Tutorial creado para entender el CSS del Portal Proveedores CMP · <a href="index.html">← Volver al portal</a></p>
+</footer>
+
+<script>
+(function () {
+    // ─── 1. VARIABLES ───
+    const vp = document.getElementById('vars-picker');
+    const vv = document.getElementById('vars-val');
+    const vc = document.getElementById('vars-code');
+    const vs = document.getElementById('vars-stage');
+    vp.addEventListener('input', () => {
+        const c = vp.value.toUpperCase();
+        vs.style.setProperty('--demo-color', c);
+        vv.textContent = c;
+        vc.textContent = c;
+    });
+    vs.style.setProperty('--demo-color', vp.value);
+
+    // ─── 2. PADDING ───
+    const padY = document.getElementById('pad-y');
+    const padX = document.getElementById('pad-x');
+    const padYV = document.getElementById('pad-y-val');
+    const padXV = document.getElementById('pad-x-val');
+    const padCode = document.getElementById('pad-code');
+    const padOuter = document.getElementById('pad-outer');
+    function updatePad() {
+        const y = padY.value, x = padX.value;
+        padOuter.style.padding = y + 'px ' + x + 'px';
+        padYV.textContent = y + 'px';
+        padXV.textContent = x + 'px';
+        padCode.textContent = y + 'px ' + x + 'px';
+    }
+    padY.addEventListener('input', updatePad);
+    padX.addEventListener('input', updatePad);
+    updatePad();
+
+    // ─── 3. BORDER-RADIUS ───
+    const radSlider = document.getElementById('rad-slider');
+    const radDemo = document.getElementById('rad-demo');
+    const radVal = document.getElementById('rad-val');
+    const radCode = document.getElementById('rad-code');
+    const radPresets = document.getElementById('rad-presets');
+    function setRad(v) {
+        radDemo.style.borderRadius = v + 'px';
+        radVal.textContent = v + 'px';
+        radCode.textContent = v + 'px';
+        radSlider.value = v;
+        radPresets.querySelectorAll('button').forEach(b => {
+            b.classList.toggle('active', b.dataset.v === String(v));
+        });
+    }
+    radSlider.addEventListener('input', () => setRad(radSlider.value));
+    radPresets.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => setRad(b.dataset.v));
+    });
+    setRad(8);
+
+    // ─── 4. BOX-SHADOW ───
+    const shX = document.getElementById('sh-x');
+    const shY = document.getElementById('sh-y');
+    const shB = document.getElementById('sh-b');
+    const shO = document.getElementById('sh-o');
+    const shDemo = document.getElementById('sh-demo');
+    const shCode = document.getElementById('sh-code');
+    function updateShadow() {
+        const o = (shO.value / 100).toFixed(2);
+        const val = shX.value + 'px ' + shY.value + 'px ' + shB.value + 'px rgba(0,0,0,' + o + ')';
+        shDemo.style.boxShadow = val;
+        document.getElementById('sh-x-val').textContent = shX.value + 'px';
+        document.getElementById('sh-y-val').textContent = shY.value + 'px';
+        document.getElementById('sh-b-val').textContent = shB.value + 'px';
+        document.getElementById('sh-o-val').textContent = o;
+        shCode.textContent = val;
+    }
+    [shX, shY, shB, shO].forEach(s => s.addEventListener('input', updateShadow));
+    updateShadow();
+
+    // ─── 5. FLEX ───
+    const flexC = document.getElementById('flex-container');
+    const flexJ = document.getElementById('flex-justify');
+    const flexA = document.getElementById('flex-align');
+    const flexJC = document.getElementById('flex-j-code');
+    const flexAC = document.getElementById('flex-a-code');
+    flexJ.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+            flexJ.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            flexC.style.justifyContent = b.dataset.v;
+            flexJC.textContent = b.dataset.v;
+        });
+    });
+    flexA.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+            flexA.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            flexC.style.alignItems = b.dataset.v;
+            flexAC.textContent = b.dataset.v;
+        });
+    });
+
+    // ─── 6. HOVER + TRANSITION ───
+    const hDur = document.getElementById('hover-dur');
+    const hBtn = document.getElementById('hover-btn');
+    const hVal = document.getElementById('hover-dur-val');
+    const hCode = document.getElementById('hover-code');
+    function updateHover() {
+        const s = (hDur.value / 100).toFixed(2);
+        hBtn.style.transition = 'all ' + s + 's ease';
+        hVal.textContent = s + 's';
+        hCode.textContent = s + 's';
+    }
+    hDur.addEventListener('input', updateHover);
+    hBtn.addEventListener('mouseenter', () => {
+        hBtn.style.background = 'var(--cmp-dark)';
+        hBtn.style.transform = 'translateY(-2px)';
+        hBtn.style.boxShadow = '0 8px 20px rgba(0,47,108,.3)';
+    });
+    hBtn.addEventListener('mouseleave', () => {
+        hBtn.style.background = 'var(--cmp-blue)';
+        hBtn.style.transform = 'translateY(0)';
+        hBtn.style.boxShadow = 'none';
+    });
+    updateHover();
+
+    // ─── 7. MEDIA / VIEWPORT ───
+    const vpSlider = document.getElementById('vp-slider');
+    const vpFrame = document.getElementById('vp-frame');
+    const vpGrid = document.getElementById('vp-grid');
+    const vpValLabel = document.getElementById('vp-val');
+    function updateVp() {
+        const w = parseInt(vpSlider.value, 10);
+        vpFrame.style.maxWidth = w + 'px';
+        vpValLabel.textContent = w + 'px';
+        let cols;
+        if (w < 500) cols = '1fr';
+        else if (w < 700) cols = 'repeat(2, 1fr)';
+        else cols = 'repeat(3, 1fr)';
+        vpGrid.style.gridTemplateColumns = cols;
+    }
+    vpSlider.addEventListener('input', updateVp);
+    updateVp();
+})();
+</script>
+
+</body>
+</html>
