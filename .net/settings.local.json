@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"C:\\\\Users\\\\benja\\\\OneDrive\\\\Escritorio\\\\Portal_Proveedores_CMP\\\\logo.png\"\\); $sig = \\($bytes[0..7] | ForEach-Object { $_.ToString\\(\"X2\"\\) }\\) -join \" \"; Write-Output \"Firma hex \\(8 bytes\\): $sig\"; if \\($bytes[0] -eq 0x89 -and $bytes[1] -eq 0x50 -and $bytes[2] -eq 0x4E -and $bytes[3] -eq 0x47\\) { $w = [BitConverter]::ToInt32\\(\\($bytes[19..16]\\), 0\\); $h = [BitConverter]::ToInt32\\(\\($bytes[23..20]\\), 0\\); Write-Output \"Formato: PNG válido\"; Write-Output \"Dimensiones: ${w} x ${h}\"; Write-Output \"Tamaño archivo: $\\($bytes.Length\\) bytes\" } else { Write-Output \"NO es PNG válido \\(firma no coincide\\)\" })",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"C:\\\\Users\\\\benja\\\\OneDrive\\\\Escritorio\\\\Portal_Proveedores_CMP\\\\favicon.png\"\\); $sig = \\($bytes[0..7] | ForEach-Object { $_.ToString\\(\"X2\"\\) }\\) -join \" \"; Write-Output \"Firma hex \\(8 bytes\\): $sig\"; if \\($bytes[0] -eq 0x89 -and $bytes[1] -eq 0x50 -and $bytes[2] -eq 0x4E -and $bytes[3] -eq 0x47\\) { $w = [BitConverter]::ToInt32\\(\\($bytes[19..16]\\), 0\\); $h = [BitConverter]::ToInt32\\(\\($bytes[23..20]\\), 0\\); $ratio = [Math]::Round\\($w / $h, 2\\); Write-Output \"Formato: PNG válido\"; Write-Output \"Dimensiones: ${w} x ${h} \\(ratio ${ratio}:1\\)\"; Write-Output \"Tamaño: $\\($bytes.Length\\) bytes\" } else { Write-Output \"NO es PNG válido\" })",
+      "Bash(command -v magick convert python python3)",
+      "Bash(python *)",
+      "Bash(command -v magick)",
+      "Bash(command -v node)",
+      "Bash(npm list *)",
+      "Bash(node -e \"try{require\\('jimp'\\)}catch\\(e\\){console.log\\('no jimp'\\)}; try{require\\('sharp'\\)}catch\\(e\\){console.log\\('no sharp'\\)}; try{require\\('pngjs'\\)}catch\\(e\\){console.log\\('no pngjs'\\)}\")",
+      "Bash(git *)",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"index.html\"\\) | Select-Object -First 3; $hasBom = \\($bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF\\); Write-Output \"HasBOM: $hasBom\"; $content = [System.IO.File]::ReadAllText\\(\"index.html\"\\); $crlf = \\($content -match \"`r`n\"\\); Write-Output \"HasCRLF: $crlf\"; Write-Output \\(\"FileSize: \" + \\(Get-Item index.html\\).Length + \" bytes\"\\))",
+      "PowerShell(New-Item *)",
+      "Bash(gh repo *)"
+    ]
+  }
+}
