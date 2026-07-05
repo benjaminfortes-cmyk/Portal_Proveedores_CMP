@@ -10,7 +10,6 @@
             --white: #FFFFFF;
             --gray-bg: #F4F7FB;
             --gray-text: #4A5568;
-            --success: #1A7A34;
             --text-dark: #1A2744;
         }
 
@@ -28,6 +27,7 @@
         #minerales,
         #compra-venta,
         #arriendo-concesiones,
+        #linea-arriendo,
         #proceso,
         #contacto,
         #mapa-concesiones {
@@ -243,6 +243,7 @@
             border-radius: 50%;
             bottom: -80px;
             left: -60px;
+            pointer-events: none;
         }
 
         .cmp-hero-left h1 {
@@ -278,15 +279,20 @@
         
         .cmp-hero-actions {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 22px;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .cmp-hero-actions-row {
+        .cmp-hero-action-col {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 14px;
-            flex-wrap: wrap;
+        }
+
+        .cmp-hero-action-col .cmp-btn-hero {
+            width: 100%;
+            justify-content: center;
         }
 
         .cmp-btn-hero {
@@ -324,12 +330,6 @@
             outline-offset: 3px;
         }
 
-        .cmp-hero-links {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
         .cmp-hero-link {
             color: rgba(255, 255, 255, 0.85);
             font-size: 13.5px;
@@ -352,14 +352,14 @@
 
         /* En pantallas chicas los botones se apilan a lo ancho */
         @media (max-width: 700px) {
-            .cmp-hero-actions-row {
+            .cmp-hero-actions {
                 flex-direction: column;
                 align-items: stretch;
                 width: 100%;
             }
 
-            .cmp-btn-hero {
-                justify-content: center;
+            .cmp-hero-action-col {
+                width: 100%;
             }
         }
 
@@ -436,91 +436,6 @@
             }
         }
 
-        /* pintura botón PRONTO */
-        .cmp-btn-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .cmp-btn-coming-soon {
-            position: absolute;
-            top: -12px;
-            right: -14px;
-            z-index: 5;
-            background: linear-gradient(135deg, #FF3B30 0%, #C8102E 100%);
-            color: white;
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 6px 12px;
-            border-radius: 14px;
-            border: 2px solid white;
-            box-shadow: 0 6px 16px rgba(200, 16, 46, 0.5),
-                0 2px 6px rgba(0, 0, 0, 0.18);
-            transform: rotate(8deg);
-            transform-origin: center;
-            pointer-events: none;
-            animation: cmp-coming-pop 1.6s ease-in-out infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes cmp-coming-pop {
-
-            0%,
-            100% {
-                transform: rotate(8deg) scale(1);
-                box-shadow: 0 6px 16px rgba(200, 16, 46, 0.5),
-                    0 2px 6px rgba(0, 0, 0, 0.18),
-                    0 0 0 0 rgba(255, 59, 48, 0.6);
-            }
-
-            50% {
-                transform: rotate(8deg) scale(1.12);
-                box-shadow: 0 8px 22px rgba(200, 16, 46, 0.65),
-                    0 2px 6px rgba(0, 0, 0, 0.18),
-                    0 0 0 8px rgba(255, 59, 48, 0);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .cmp-btn-coming-soon {
-                animation: none;
-            }
-        }
-
-        .cmp-btn-outline {
-            background: transparent;
-            color: white;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.3s;
-        }
-
-        .cmp-btn-outline:hover {
-            border-color: white;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* ── MEGA TÍTULO DE SECCIÓN  ── */
-        .cmp-mega-title {
-            background: white;
-            padding: 78px 40px 58px;
-            text-align: center;
-            position: relative;
-        }
-
-        .cmp-mega-title-inner {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
         .cmp-mega-title-label {
             display: inline-flex;
             align-items: center;
@@ -540,38 +455,6 @@
 
         .cmp-mega-title-label i {
             color: white;
-        }
-
-        .cmp-mega-title h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(34px, 5vw, 58px);
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.1;
-            margin: 0;
-        }
-
-        .cmp-mega-title h2 em {
-            font-style: normal;
-        }
-
-        /* Línea dorada decorativa bajo el título */
-        .cmp-mega-title h2::after {
-            content: '';
-            display: block;
-            width: 90px;
-            height: 4px;
-            margin: 22px auto 0;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #198DBE, #60DFBB, #C9F6E7, #60DFBB, #198DBE);
-        }
-
-        .cmp-mega-title p {
-            color: var(--gray-text);
-            font-size: 16px;
-            line-height: 1.7;
-            max-width: 640px;
-            margin: 22px auto 0;
         }
 
         /* Banda con botón "postular nuevamente" */
@@ -982,21 +865,6 @@
             margin-top: 3px;
         }
 
-        .cmp-mineral-product-specs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 2px;
-        }
-
-        .cmp-mineral-product-spec-sm {
-            font-size: 16px;
-            padding: 7px 16px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 47, 108, 0.28);
-        }
-
         .cmp-mineral-product-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 22px 50px rgba(0, 47, 108, 0.28);
@@ -1017,15 +885,6 @@
             padding: 5px 12px;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(25, 141, 190, 0.45);
-        }
-
-        .cmp-mineral-product-sublabel {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: -8px;
         }
 
         /* Grid responsivo para minerales (5 tarjetas) */
@@ -1075,25 +934,6 @@
             background: linear-gradient(135deg, var(--cmp-darker), var(--cmp-blue));
             box-shadow: 0 20px 60px rgba(0, 47, 108, 0.2);
         }
-
-        .cmp-what-img-placeholder {
-            width: 100%;
-            min-height: 420px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.4);
-            gap: 12px;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .cmp-what-img-placeholder span {
-            font-size: 70px;
-        }
-
-
 
         /* ── PROCESO ── */
         .cmp-process {
@@ -1288,159 +1128,6 @@
             z-index: 1;
         }
 
-        /* ── PAGO ── */
-        .cmp-payment {
-            background: white;
-            padding: 100px 40px;
-        }
-
-        .cmp-payment-inner {
-            max-width: 1180px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.05fr;
-            gap: 70px;
-            align-items: stretch;
-        }
-
-        .cmp-payment-imgbox {
-            border-radius: 16px;
-            background: white;
-            border: 4px solid var(--cmp-blue);
-            padding: 4px;
-            box-shadow: 0 22px 50px rgba(0, 47, 108, 0.18),
-                0 4px 12px rgba(0, 47, 108, 0.08);
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .cmp-payment-imgbox:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 28px 60px rgba(0, 47, 108, 0.22),
-                0 6px 14px rgba(0, 47, 108, 0.10);
-        }
-
-        .cmp-payment-imgbox img {
-            border-radius: 10px;
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .cmp-payment-img-placeholder {
-            width: 100%;
-            min-height: 380px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.4);
-            gap: 12px;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .cmp-payment-img-placeholder span {
-            font-size: 70px;
-        }
-
-        .cmp-payment-features {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .cmp-payment-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 18px;
-            padding: 22px 24px;
-            border-radius: 12px;
-            background: white;
-            border: 1px solid rgba(0, 102, 204, 0.08);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .cmp-payment-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--cmp-blue);
-            transform: scaleY(0.25);
-            transform-origin: center;
-            transition: transform 0.4s ease;
-        }
-
-        .cmp-payment-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 14px 30px rgba(0, 74, 153, 0.10);
-            border-color: rgba(0, 102, 204, 0.18);
-        }
-
-        .cmp-payment-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .cmp-payment-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-            color: white;
-            box-shadow: 0 6px 14px rgba(0, 74, 153, 0.22);
-        }
-
-        .cmp-payment-item:nth-child(1) .cmp-payment-icon {
-            background: linear-gradient(135deg, var(--cmp-darker), var(--cmp-dark));
-        }
-
-        .cmp-payment-item:nth-child(2) .cmp-payment-icon {
-            background: linear-gradient(135deg, var(--cmp-dark), var(--cmp-blue));
-        }
-
-        .cmp-payment-item:nth-child(3) .cmp-payment-icon {
-            background: linear-gradient(135deg, var(--cmp-blue), #3399FF);
-        }
-
-        .cmp-payment-item:nth-child(4) .cmp-payment-icon {
-            background: linear-gradient(135deg, #3399FF, #66B2FF);
-        }
-
-        .cmp-payment-text h4 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 6px;
-            letter-spacing: -0.2px;
-        }
-
-        .cmp-payment-text p {
-            font-size: 13.5px;
-            color: var(--gray-text);
-            line-height: 1.55;
-        }
-
-        .cmp-payment-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(28px, 3.5vw, 46px);
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 24px;
-            line-height: 1.1;
-        }
-
         /* ── CTA ── */
         /* ── CIERRE CON FOTO AÉREA (estilo Reporte de Sostenibilidad) ──
            Una sola foto continua bajo el CTA final y Contacto, con velo
@@ -1595,10 +1282,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .cmp-payment-inner {
-                grid-template-columns: 1fr;
-            }
-
             .cmp-process-timeline {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -1623,7 +1306,6 @@
 
             .cmp-what,
             .cmp-process,
-            .cmp-payment,
             .cmp-cta {
                 padding: 60px 24px;
             }
@@ -2106,24 +1788,6 @@
             display: block;
             font-size: 16px;
             margin-bottom: 4px;
-        }
-
-        .cmp-mapa-disclaimer {
-            margin-top: 32px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--gray-text);
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .cmp-mapa-disclaimer i {
-            color: var(--cmp-teal-dark);
-            font-size: 14px;
         }
 
         @media (max-width: 900px) {
