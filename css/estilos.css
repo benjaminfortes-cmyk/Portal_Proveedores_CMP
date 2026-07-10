@@ -1485,7 +1485,6 @@
 
         .cmp-mapa-region-group.is-disabled .cmp-mapa-region {
             fill: rgba(120, 120, 120, 0.08);
-            pointer-events: none;
         }
 
         .cmp-mapa-region-group.is-disabled .cmp-mapa-region-label {
@@ -1567,6 +1566,36 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #e5edf6;
+            scroll-margin-top: 90px; /* navbar sticky no tapa el panel al hacer scroll */
+        }
+
+        /* Aviso "Próximamente" sobre el mapa al tocar una región deshabilitada */
+        .cmp-mapa-toast {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            background: var(--cmp-blue);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12.5px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 999px;
+            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            white-space: nowrap;
+            max-width: calc(100% - 24px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 2;
+        }
+
+        .cmp-mapa-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .cmp-mapa-empty {

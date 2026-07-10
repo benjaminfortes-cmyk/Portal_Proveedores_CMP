@@ -91,6 +91,25 @@
                 panel.innerHTML = html;
             }
 
+            // Aviso "Próximamente" para regiones aún no disponibles
+            const svgWrap = document.querySelector('.cmp-mapa-svg-wrap');
+            let toastTimer = null;
+            function showToast(text) {
+                if (!svgWrap) return;
+                let toast = svgWrap.querySelector('.cmp-mapa-toast');
+                if (!toast) {
+                    toast = document.createElement('div');
+                    toast.className = 'cmp-mapa-toast';
+                    svgWrap.appendChild(toast);
+                }
+                toast.innerHTML = '<i class="ph ph-clock-countdown" style="vertical-align: text-bottom;"></i> ' + escapeHtml(text);
+                toast.classList.remove('show');
+                void toast.offsetWidth; // reinicia la transición si ya estaba visible
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+            }
+
             const regions = document.querySelectorAll('.cmp-mapa-region-group');
             regions.forEach(el => {
                 const isDisabled = el.dataset.disabled === 'true';
@@ -98,6 +117,10 @@
                 if (isDisabled) {
                     el.setAttribute('aria-disabled', 'true');
                     el.setAttribute('aria-label', 'Región próximamente disponible');
+                    el.addEventListener('click', () => {
+                        const data = concesiones[el.dataset.region];
+                        showToast('Próximamente en la ' + (data ? data.nombre : 'región'));
+                    });
                     return;
                 }
 
@@ -110,6 +133,10 @@
                     document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]:not(.is-disabled)')
                         .forEach(g => g.classList.add('active'));
                     renderRegion(el.dataset.region);
+                    // En móvil el panel queda bajo el mapa: llevarlo a la vista
+                    if (window.matchMedia('(max-width: 900px)').matches) {
+                        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 };
                 const setHover = (on) => {
                     document.querySelectorAll('.cmp-mapa-region-group[data-region="' + el.dataset.region + '"]:not(.is-disabled)')
