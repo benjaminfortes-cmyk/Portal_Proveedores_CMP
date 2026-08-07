@@ -40,6 +40,102 @@
         rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .cmp-hero {
+            display: flex;
+            min-height: calc(100vh - 84px);
+            min-height: calc(100svh - 84px);
+        }
+
+        .cmp-hero-bg {
+            object-position: center;
+        }
+
+        .cmp-hero-overlay {
+            background: linear-gradient(180deg,
+                    rgba(0, 47, 108, 0.55) 0%,
+                    rgba(0, 60, 130, 0.60) 55%,
+                    rgba(0, 35, 80, 0.72) 100%);
+        }
+
+        .cmp-hero-content {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: clamp(24px, 6vh, 80px) 32px clamp(28px, 7vh, 90px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cmp-hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(14px, 4.6vw, 54px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            text-transform: uppercase;
+            white-space: nowrap;
+            letter-spacing: -0.3px;
+            margin-bottom: 22px;
+            text-shadow: 0 2px 24px rgba(0, 20, 50, 0.45);
+        }
+
+        .cmp-hero-content h1 em {
+            font-style: normal;
+            color: white;
+            text-decoration: underline;
+            text-decoration-thickness: 4px;
+            text-decoration-color: var(--cmp-teal);
+            text-underline-offset: 5px;
+        }
+
+        .cmp-hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(17px, 2vw, 24px);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .cmp-hero-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(14px, 1.5vw, 16px);
+            line-height: 1.7;
+            max-width: 680px;
+            margin-bottom: 38px;
+            text-shadow: 0 1px 14px rgba(0, 20, 50, 0.5);
+        }
+
+        .cmp-hero-actions-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (max-width: 700px) {
+            .cmp-hero-actions-row {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+
+            .cmp-btn-hero {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .cmp-hero-content {
+                padding: clamp(24px, 5vh, 60px) 24px clamp(28px, 6vh, 70px);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -66,26 +162,18 @@
     <div class="cmp-hero">
         <img src="./Imagen3.jpg" alt="Acopio de hierro" class="cmp-hero-bg" fetchpriority="high" decoding="async">
         <div class="cmp-hero-overlay"></div>
-        <div class="cmp-hero-left">
+        <div class="cmp-hero-content">
             <h1>¿Produces mineral de <em>hierro</em>?<br>CMP lo compra.</h1>
-            <h2 class="cmp-hero-shimmer"
-                style="font-family: 'Montserrat', sans-serif; font-size: 24px; color: var(--cmp-teal); margin-bottom: 20px; font-weight: 600;">
-                ¿BUSCAS OPORTUNIDAD DE NEGOCIO seguro? CMP lo ofrece</h2>
+            <h2 class="cmp-hero-shimmer cmp-hero-subtitle">¿BUSCAS OPORTUNIDAD DE NEGOCIO seguro? CMP lo ofrece</h2>
             <p>Somos la principal empresa minera de hierro de Chile y estamos ampliando nuestra red de proveedores
-                externos. Si produces mineral de hierro en cualquiera de sus granulometrías, ya sea preconcentrado, sínter feed, pellet feed o granzas,
-                queremos conocerte. Además, <strong>se arriendan concesiones mineras</strong> para que puedas
-                operarlas con demanda garantizada.</p>
-            <div class="cmp-hero-actions">
-                <div class="cmp-hero-action-col">
-                    <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_7PT2OLhK1sBiDmC"
-                        class="cmp-btn-hero">Postular como proveedor <i class="ph ph-arrow-right"></i></a>
-                    <a href="#minerales" class="cmp-hero-link">Ver qué compramos ↓</a>
-                </div>
-                <div class="cmp-hero-action-col">
-                    <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_eRNMhbvPVHHACt8"
-                        class="cmp-btn-hero">Postular a una concesión <i class="ph ph-arrow-right"></i></a>
-                    <a href="#linea-arriendo" class="cmp-hero-link">Ver cómo arrendar ↓</a>
-                </div>
+                externos. Si produces mineral de hierro en cualquiera de sus granulometrías, ya sea preconcentrado,
+                sínter feed, pellet feed o granzas, queremos conocerte. Además, <strong>se arriendan concesiones
+                    mineras</strong> para que puedas operarlas con demanda garantizada.</p>
+            <div class="cmp-hero-actions-row">
+                <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_7PT2OLhK1sBiDmC"
+                    class="cmp-btn-hero">Postular como proveedor <i class="ph ph-arrow-right"></i></a>
+                <a href="https://ciamineradelpacifico.qualtrics.com/jfe/form/SV_eRNMhbvPVHHACt8"
+                    class="cmp-btn-hero">Postular a una concesión <i class="ph ph-arrow-right"></i></a>
             </div>
         </div>
     </div>
