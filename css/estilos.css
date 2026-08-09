@@ -26,11 +26,8 @@
       
         #minerales,
         #compra-venta,
-        #arriendo-concesiones,
-        #linea-arriendo,
         #proceso,
-        #contacto,
-        #mapa-concesiones {
+        #contacto {
             scroll-margin-top: 92px;
         }
 
@@ -41,11 +38,44 @@
 
         
         #info h2,
-        #arriendo h2,
         .cmp-process-header h2,
-        .cmp-cta h2,
-        .cmp-mapa-header h2 {
+        .cmp-cta h2 {
             font-size: clamp(24px, 2.6vw, 36px) !important;
+        }
+
+        /* ── INTRO DEL LOGO ── */
+        .cmp-intro {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .cmp-sin-intro .cmp-intro {
+            display: none;
+        }
+
+        .cmp-intro-fondo {
+            position: absolute;
+            inset: 0;
+            background: var(--white);
+        }
+
+        .cmp-intro-logo {
+            position: relative;
+            width: min(240px, 46vw);
+            height: auto;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cmp-intro {
+                display: none;
+            }
         }
 
         /* ── NAVBAR ── */
@@ -146,7 +176,6 @@
             background: var(--cmp-darker);
         }
 
-        /* Botón hamburguesa (solo visible en móvil) */
         .cmp-nav-toggle {
             display: none;
             background: none;
@@ -200,7 +229,6 @@
             background: #00469B;
         }
 
-        /* Imagen de fondo a pantalla completa */
         .cmp-hero-bg {
             position: absolute;
             inset: 0;
@@ -223,78 +251,8 @@
                     rgba(0, 102, 204, 0) 100%);
         }
 
-        .cmp-hero-left {
-            position: relative;
-            z-index: 2;
-            max-width: 720px;
-            padding: 32px 50px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 520px;
-        }
-
-        .cmp-hero-left::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 50%;
-            bottom: -80px;
-            left: -60px;
-            pointer-events: none;
-        }
-
-        .cmp-hero-left h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(28px, 3.2vw, 44px);
-            font-weight: 800;
-            color: white;
-            line-height: 1.08;
-            text-transform: uppercase;
-            letter-spacing: -0.3px;
-            margin-bottom: 20px;
-        }
-
-        .cmp-hero-left h1 em {
-            font-style: normal;
-            color: white;
-            text-decoration: underline;
-            text-decoration-thickness: 4px;
-            text-decoration-color: var(--cmp-teal);
-            text-underline-offset: 4px;
-        }
-
-        .cmp-hero-left p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 36px;
-            max-width: 400px;
-            text-align: justify;
-            hyphens: auto;
-        }
 
         
-        .cmp-hero-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .cmp-hero-action-col {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .cmp-hero-action-col .cmp-btn-hero {
-            width: 100%;
-            justify-content: center;
-        }
-
         .cmp-btn-hero {
             display: inline-flex;
             align-items: center;
@@ -331,12 +289,17 @@
         }
 
         .cmp-hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 22px;
             color: rgba(255, 255, 255, 0.85);
             font-size: 13.5px;
             font-weight: 600;
             text-decoration: none;
             border-bottom: 2px solid rgba(96, 223, 187, 0.6);
             padding-bottom: 3px;
+            text-shadow: 0 1px 14px rgba(0, 20, 50, 0.5);
             transition: color 0.2s, border-color 0.2s;
         }
 
@@ -345,26 +308,21 @@
             border-bottom-color: var(--cmp-teal);
         }
 
+        .cmp-hero-link i {
+            font-size: 1.15em;
+            transition: transform 0.25s ease;
+        }
+
+        .cmp-hero-link:hover i {
+            transform: translateY(3px);
+        }
+
         .cmp-hero-link:focus-visible {
             outline: 2px solid var(--cmp-teal);
             outline-offset: 3px;
         }
 
-        /* En pantallas chicas los botones se apilan a lo ancho */
-        @media (max-width: 700px) {
-            .cmp-hero-actions {
-                flex-direction: column;
-                align-items: stretch;
-                width: 100%;
-            }
-
-            .cmp-hero-action-col {
-                width: 100%;
-            }
-        }
-
-        /* ── BOTÓN PRINCIPAL DE POSTULACIÓN ──
-           Degradado azul→verde-agua oficial de CMP, sin animaciones de brillo. */
+        /* ── BOTÓN PRINCIPAL DE POSTULACIÓN ── */
         .cmp-btn-main {
             display: inline-block;
             background: var(--cmp-grad);
@@ -393,8 +351,6 @@
             outline-color: white;
         }
 
-        /* Efecto de barrido compartido: el degradado invertido entra desde
-           el centro al pasar el mouse (mismo efecto del sitio oficial CMP) */
         .cmp-btn-main,
         .cmp-btn-hero {
             position: relative;
@@ -457,7 +413,6 @@
             color: white;
         }
 
-        /* Banda con botón "postular nuevamente" */
         .cmp-postular-band {
             background: white;
             text-align: center;
@@ -519,16 +474,10 @@
             color: var(--cmp-blue);
         }
 
-        /* Intro de la sección: etiqueta + descripción (queda bajo la barra) */
         .cmp-line-intro {
             background: white;
             text-align: center;
             padding: 50px 40px 8px;
-        }
-
-        /* El intro de "Arriendo" va en gris para combinar con el bloque de abajo */
-        #arriendo-concesiones .cmp-line-intro {
-            background: var(--gray-bg);
         }
 
         .cmp-line-intro .cmp-mega-title-label {
@@ -792,7 +741,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Granulometría — especificaciones físicas dentro de cada card */
         .cmp-mineral-product-granu {
             width: 100%;
             margin-top: auto;
@@ -870,7 +818,6 @@
             box-shadow: 0 22px 50px rgba(0, 47, 108, 0.28);
         }
 
-        /* Tag superior (para sub-clasificación P43) */
         .cmp-mineral-product-tag {
             position: absolute;
             top: 14px;
@@ -887,7 +834,6 @@
             box-shadow: 0 4px 12px rgba(25, 141, 190, 0.45);
         }
 
-        /* Grid responsivo para minerales (5 tarjetas) */
         .cmp-minerals-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -1129,9 +1075,7 @@
         }
 
         /* ── CTA ── */
-        /* ── CIERRE CON FOTO AÉREA (estilo Reporte de Sostenibilidad) ──
-           Una sola foto continua bajo el CTA final y Contacto, con velo
-           azul degradado para mantener la legibilidad. */
+        /* ── CIERRE CON FOTO AÉREA ── */
         .cmp-final-bg {
             position: relative;
             background: url('../Imagen1.jpg') center / cover no-repeat;
@@ -1204,7 +1148,6 @@
             gap: 30px;
         }
 
-        /* Tarjetas de vidrio sobre la foto */
         .cmp-contact-card {
             background: rgba(0, 25, 60, 0.35);
             backdrop-filter: blur(10px);
@@ -1259,7 +1202,6 @@
             font-size: 12px;
         }
 
-        /* Logo CMP en blanco (misma altura que el texto que reemplaza) */
         .cmp-footer-logo {
             height: 30px;
             width: auto;
@@ -1270,7 +1212,6 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
-            /* En pantallas chicas el degradado cubre todo para mantener legibilidad */
             .cmp-hero-overlay {
                 background: linear-gradient(180deg,
                         rgba(0, 70, 155, 0.95) 0%,
@@ -1300,10 +1241,6 @@
                 text-align: center;
             }
 
-            .cmp-hero-left {
-                padding: 50px 28px;
-            }
-
             .cmp-what,
             .cmp-process,
             .cmp-cta {
@@ -1325,7 +1262,6 @@
                 display: block;
             }
 
-            /* El menú pasa a ser un panel desplegable bajo el navbar */
             .cmp-nav-links {
                 display: none;
                 position: absolute;
@@ -1367,483 +1303,3 @@
             }
         }
 
-        /* ── MAPA INTERACTIVO DE CONCESIONES ── */
-        .cmp-mapa-section {
-            background: white;
-            padding: 80px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cmp-mapa-section::before {
-            content: '';
-            position: absolute;
-            top: -120px;
-            right: -120px;
-            width: 320px;
-            height: 320px;
-            background: radial-gradient(circle, rgba(0, 102, 204, 0.06), transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .cmp-mapa-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .cmp-mapa-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .cmp-mapa-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(28px, 3.5vw, 46px);
-            font-weight: 700;
-            color: var(--text-dark);
-            line-height: 1.15;
-            margin-bottom: 14px;
-        }
-
-        .cmp-mapa-header p {
-            color: var(--gray-text);
-            max-width: 640px;
-            margin: 0 auto;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .cmp-beta-badge {
-            display: inline-block;
-            background: var(--cmp-grad);
-            color: white;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            padding: 5px 11px;
-            border-radius: 5px;
-            margin-left: 10px;
-            vertical-align: middle;
-            text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(25, 141, 190, 0.4);
-            animation: cmp-beta-pulse 2.4s ease-in-out infinite;
-        }
-
-        @keyframes cmp-beta-pulse {
-            0%, 100% { box-shadow: 0 2px 8px rgba(25, 141, 190, 0.4); }
-            50% { box-shadow: 0 2px 16px rgba(96, 223, 187, 0.7); }
-        }
-
-        .cmp-mapa-grid {
-            display: grid;
-            grid-template-columns: 0.85fr 1fr;
-            gap: 40px;
-            align-items: stretch;
-        }
-
-        .cmp-mapa-svg-wrap {
-            position: relative;
-            background: linear-gradient(180deg, #f4f9ff 0%, #e7f0fa 100%);
-            border-radius: 16px;
-            padding: 24px 16px;
-            border: 1px solid #dde7f3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 460px;
-        }
-
-        .cmp-mapa-svg {
-            width: 100%;
-            max-width: 420px;
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 4px 12px rgba(0, 47, 108, 0.08));
-        }
-
-        .cmp-mapa-region-group {
-            cursor: pointer;
-        }
-
-        .cmp-mapa-region {
-            fill: transparent;
-            transition: fill 0.3s ease;
-        }
-
-        .cmp-mapa-region-group:not(.is-disabled):hover .cmp-mapa-region,
-        .cmp-mapa-region-group:not(.is-disabled).hover-sync .cmp-mapa-region {
-            fill: rgba(0, 102, 204, 0.55);
-        }
-
-        /* Regiones deshabilitadas — solo Atacama y Coquimbo disponibles por ahora */
-        .cmp-mapa-region-group.is-disabled {
-            cursor: not-allowed;
-            opacity: 0.45;
-        }
-
-        .cmp-mapa-region-group.is-disabled .cmp-mapa-region {
-            fill: rgba(120, 120, 120, 0.08);
-        }
-
-        .cmp-mapa-region-group.is-disabled .cmp-mapa-region-label {
-            fill: rgba(0, 47, 108, 0.5);
-            font-weight: 600;
-        }
-
-        .cmp-mapa-region-group.is-disabled .cmp-mapa-region-leader {
-            stroke: rgba(0, 47, 108, 0.35);
-            opacity: 0.4;
-        }
-
-        .cmp-mapa-region-group.active .cmp-mapa-region,
-        .cmp-mapa-region-group.active.hover-sync .cmp-mapa-region {
-            fill: rgba(26, 160, 60, 0.72);
-        }
-
-        .cmp-mapa-region-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            fill: var(--cmp-darker);
-            pointer-events: none;
-            text-anchor: start;
-            transition: fill 0.25s ease;
-        }
-
-        .cmp-mapa-region-group.active .cmp-mapa-region-label,
-        .cmp-mapa-region-group:hover .cmp-mapa-region-label,
-        .cmp-mapa-region-group.hover-sync .cmp-mapa-region-label {
-            fill: var(--cmp-darker);
-            font-weight: 800;
-        }
-
-        .cmp-mapa-region-group.active .cmp-mapa-region-leader,
-        .cmp-mapa-region-group:hover .cmp-mapa-region-leader,
-        .cmp-mapa-region-group.hover-sync .cmp-mapa-region-leader {
-            opacity: 1;
-            stroke: var(--cmp-blue);
-            stroke-dasharray: none;
-        }
-
-        .cmp-mapa-region-group.active .cmp-mapa-region-leader {
-            stroke: #1aa03c;
-        }
-
-        .cmp-mapa-region-leader {
-            stroke: var(--cmp-blue);
-            stroke-width: 1;
-            stroke-dasharray: 2,2;
-            opacity: 0.5;
-            fill: none;
-            pointer-events: none;
-        }
-
-        .cmp-mapa-compass {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 800;
-            fill: var(--cmp-darker);
-            opacity: 0.55;
-        }
-
-        .cmp-mapa-ocean-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            fill: var(--cmp-blue);
-            opacity: 0.45;
-            font-style: italic;
-            letter-spacing: 1.5px;
-        }
-
-        .cmp-mapa-panel {
-            background: var(--gray-bg);
-            border-radius: 16px;
-            padding: 32px;
-            min-height: 460px;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #e5edf6;
-            scroll-margin-top: 90px; /* navbar sticky no tapa el panel al hacer scroll */
-        }
-
-        /* Aviso "Próximamente" sobre el mapa al tocar una región deshabilitada */
-        .cmp-mapa-toast {
-            position: absolute;
-            top: 18px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-6px);
-            background: var(--cmp-blue);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12.5px;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 999px;
-            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            white-space: nowrap;
-            max-width: calc(100% - 24px);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            z-index: 2;
-        }
-
-        .cmp-mapa-toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .cmp-mapa-empty {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--gray-text);
-            padding: 20px;
-        }
-
-        .cmp-mapa-empty-icon {
-            font-size: 64px;
-            color: var(--cmp-blue);
-            opacity: 0.45;
-            margin-bottom: 18px;
-            animation: cmp-empty-bob 2.6s ease-in-out infinite;
-        }
-
-        @keyframes cmp-empty-bob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        .cmp-mapa-empty h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 30px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .cmp-mapa-empty p {
-            font-size: 14px;
-            max-width: 320px;
-            line-height: 1.6;
-        }
-
-        .cmp-mapa-content {
-            animation: cmp-mapa-fade 0.4s ease;
-        }
-
-        @keyframes cmp-mapa-fade {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .cmp-mapa-content .region-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--cmp-darker);
-            margin-bottom: 6px;
-            line-height: 1.1;
-        }
-
-        .cmp-mapa-content .region-meta {
-            font-size: 13px;
-            color: var(--gray-text);
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .cmp-mapa-content .region-meta-pill {
-            background: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            color: var(--cmp-darker);
-            font-size: 11px;
-            border: 1px solid #d8e4f0;
-        }
-
-        .cmp-concesion-card {
-            background: var(--cmp-blue);
-            border-radius: 14px;
-            padding: 20px 22px;
-            margin-bottom: 14px;
-            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 16px;
-            align-items: center;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            color: white;
-        }
-
-        .cmp-concesion-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 26px rgba(0, 102, 204, 0.35);
-        }
-
-        .cmp-concesion-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 11px;
-            background: white;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
-            padding: 5px;
-            overflow: hidden;
-        }
-
-        .cmp-concesion-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        .cmp-concesion-info h4 {
-            font-size: 15px;
-            color: white;
-            font-weight: 800;
-            margin-bottom: 4px;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.3px;
-        }
-
-        .cmp-concesion-info-list {
-            font-size: 12.5px;
-            color: rgba(255, 255, 255, 0.82);
-            line-height: 1.6;
-        }
-
-        .cmp-concesion-info-list strong {
-            color: white;
-            font-weight: 600;
-        }
-
-        .cmp-concesion-cta {
-            background: white;
-            color: var(--cmp-darker);
-            font-weight: 800;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-            white-space: nowrap;
-            display: inline-block;
-        }
-
-        .cmp-concesion-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
-            background: #f4f9ff;
-        }
-
-        .cmp-mapa-comunas {
-            margin-top: 18px;
-            padding: 20px 22px;
-            background: var(--cmp-blue);
-            border-radius: 14px;
-            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
-        }
-
-        .cmp-mapa-comunas-title {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.8px;
-            color: white;
-            margin-bottom: 12px;
-            opacity: 0.95;
-        }
-
-        .cmp-mapa-comunas-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .cmp-mapa-comuna-tag {
-            background: rgba(255, 255, 255, 0.18);
-            color: white;
-            font-size: 11px;
-            padding: 5px 11px;
-            border-radius: 14px;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
-
-        .cmp-mapa-comuna-tag:hover {
-            background: rgba(255, 255, 255, 0.28);
-        }
-
-        .cmp-mapa-no-data {
-            background: var(--cmp-light);
-            border: 1px dashed var(--cmp-blue);
-            padding: 26px 22px;
-            border-radius: 12px;
-            text-align: center;
-            color: var(--gray-text);
-            font-size: 13.5px;
-            line-height: 1.6;
-        }
-
-        .cmp-mapa-no-data i {
-            font-size: 32px;
-            color: var(--cmp-blue);
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .cmp-mapa-no-data strong {
-            color: var(--cmp-blue);
-            display: block;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        @media (max-width: 900px) {
-            .cmp-mapa-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .cmp-mapa-section {
-                padding: 60px 24px;
-            }
-            .cmp-mapa-svg {
-                max-width: 320px;
-            }
-            .cmp-mapa-svg-wrap {
-                min-height: auto;
-                padding: 20px 12px;
-            }
-            .cmp-mapa-panel {
-                min-height: auto;
-                padding: 24px;
-            }
-            .cmp-concesion-card {
-                grid-template-columns: auto 1fr;
-                row-gap: 12px;
-            }
-            .cmp-concesion-cta {
-                grid-column: 1 / -1;
-                text-align: center;
-            }
-        }
