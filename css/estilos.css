@@ -951,166 +951,137 @@
             margin: 0 auto;
         }
 
+        /* Acordeón: un solo bloque azul CMP, una fila por etapa */
         .cmp-process-timeline {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            position: relative;
-            gap: 28px;
-            counter-reset: cmp-step-counter;
-        }
-
-        .cmp-process-timeline::before {
-            content: '';
-            position: absolute;
-            top: 132px;
-            left: 18%;
-            right: 18%;
-            height: 2px;
-            background-image: linear-gradient(90deg, rgba(0, 102, 204, 0.35) 50%, transparent 50%);
-            background-size: 10px 2px;
-            background-repeat: repeat-x;
-            z-index: 0;
-        }
-
-        .cmp-process-step {
-            background: white;
-            border: 1px solid rgba(0, 102, 204, 0.08);
-            border-radius: 14px;
-            padding: 48px 28px 36px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 18px rgba(0, 47, 108, 0.05);
-            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            border-radius: 18px;
             overflow: hidden;
-            counter-increment: cmp-step-counter;
+            background: linear-gradient(180deg, var(--cmp-blue) 0%, var(--cmp-dark) 62%, var(--cmp-darker) 100%);
+            box-shadow: 0 18px 46px rgba(0, 47, 108, 0.24);
         }
 
-        .cmp-process-step::before {
-            content: counter(cmp-step-counter, decimal-leading-zero);
-            position: absolute;
-            top: 6px;
-            right: 18px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 78px;
-            font-weight: 800;
-            line-height: 1;
-            color: var(--cmp-light);
-            letter-spacing: -3px;
-            pointer-events: none;
-            user-select: none;
-            transition: color 0.35s ease;
+        .cmp-process-step + .cmp-process-step {
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
         }
 
-        .cmp-process-step:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 38px rgba(0, 74, 153, 0.16);
-            border-color: rgba(0, 102, 204, 0.22);
+        .cmp-process-head {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 26px 28px;
+            cursor: pointer;
+            list-style: none;
+            transition: background 0.25s ease;
         }
 
-        .cmp-process-step:hover::before {
-            color: rgba(0, 102, 204, 0.18);
+        .cmp-process-head::-webkit-details-marker {
+            display: none;
         }
 
-        .cmp-process-icon-wrap {
-            width: 80px;
-            height: 80px;
-            margin: 14px auto 32px;
-            position: relative;
-            z-index: 1;
+        .cmp-process-head:hover {
+            background: rgba(255, 255, 255, 0.07);
         }
 
-        .cmp-process-icon-wrap::before {
-            content: '';
-            position: absolute;
-            inset: -12px;
+        .cmp-process-head:focus-visible {
+            outline: 2px solid var(--white);
+            outline-offset: -3px;
+        }
+
+        .cmp-process-index {
+            flex-shrink: 0;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            border: 2px dashed rgba(0, 102, 204, 0.32);
-            animation: cmp-process-orbit 14s linear infinite;
-            pointer-events: none;
-            transition: border-color 0.35s ease;
-        }
-
-        .cmp-process-step:hover .cmp-process-icon-wrap::before {
-            border-color: rgba(0, 102, 204, 0.6);
-        }
-
-        @keyframes cmp-process-orbit {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .cmp-process-icon-wrap::before {
-                animation: none;
-            }
-        }
-
-        .cmp-process-icon-bg {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 10px 24px rgba(0, 74, 153, 0.25);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            transition: border-color 0.25s ease, background 0.25s ease;
         }
 
-        .cmp-process-step:hover .cmp-process-icon-bg {
-            transform: scale(1.06);
-            box-shadow: 0 14px 32px rgba(0, 74, 153, 0.35);
-        }
-
-        .cmp-process-step:nth-child(1) .cmp-process-icon-bg,
-        .cmp-process-step:nth-child(2) .cmp-process-icon-bg,
-        .cmp-process-step:nth-child(3) .cmp-process-icon-bg {
-            background: var(--cmp-blue);
-        }
-
-        .cmp-process-num {
-            display: none;
+        .cmp-process-step[open] .cmp-process-index {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.14);
         }
 
         .cmp-process-step h3 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            line-height: 1.35;
+            color: var(--white);
+            margin: 0;
         }
 
-        .cmp-process-step p {
-            font-size: 14px;
-            color: var(--gray-text);
-            line-height: 1.6;
-            max-width: 240px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+        .cmp-process-toggle {
+            flex-shrink: 0;
+            margin-left: auto;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            color: var(--cmp-blue);
+            transition: transform 0.3s ease, box-shadow 0.25s ease;
+        }
+
+        .cmp-process-head:hover .cmp-process-toggle {
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.14);
+        }
+
+        .cmp-process-step[open] .cmp-process-toggle {
+            transform: rotate(45deg);
+        }
+
+        .cmp-process-body {
+            padding: 0 78px 28px;
+        }
+
+        .cmp-process-body p {
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.78);
+            margin: 0 0 20px;
+            max-width: 720px;
         }
 
         .cmp-process-tag {
-            display: inline-block;
-            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
-            padding: 5px 12px;
-            border-radius: 20px;
-            background: var(--cmp-light);
-            color: var(--cmp-blue);
-            position: relative;
-            z-index: 1;
+            color: var(--white);
+        }
+
+        .cmp-process-tag i {
+            font-size: 15px;
+            color: var(--cmp-teal);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .cmp-process-step[open] .cmp-process-body {
+                animation: cmp-process-open 0.35s ease both;
+            }
+        }
+
+        @keyframes cmp-process-open {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ── CTA ── */
@@ -1255,13 +1226,17 @@
                 grid-template-columns: 1fr;
             }
 
-            .cmp-process-timeline {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .cmp-process-head {
+                gap: 14px;
+                padding: 20px 18px;
             }
 
-            .cmp-process-timeline::before {
-                display: none;
+            .cmp-process-step h3 {
+                font-size: 16px;
+            }
+
+            .cmp-process-body {
+                padding: 0 18px 24px 66px;
             }
 
             .cmp-contact-grid {
